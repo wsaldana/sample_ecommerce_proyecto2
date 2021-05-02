@@ -40,6 +40,7 @@
 }
 .btn-user {
   background-color: blueviolet  !important;
+  margin-top: 15px;
   font-size: 15px;
   margin-left: 25%;
 }

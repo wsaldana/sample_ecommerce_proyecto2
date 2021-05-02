@@ -16,11 +16,7 @@ class Login extends React.Component {
                 <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required autoFocus />
                 <label htmlFor="inputPassword" className="sr-only">Password</label>
                 <input type="password" id="inputPassword" className="form-control" placeholder="Password" required />
-                <div className="checkbox mb-3">
-                    <label>
-                    </label>
-                </div>
-                <button className="btn btn-lg btn-primary btn-block btn-user" type="submit">Sign in as User</button>
+                <button className="btn btn-lg btn-primary btn-block btn-user" type="submit">Sign in as Admin</button>
                 <button className="btn btn-lg btn-primary btn-block btn-admin" type="submit">
                   <div className="google-icon-wrapper">
                     <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="gugul"/>
