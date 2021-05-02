@@ -21,7 +21,12 @@ class Login extends React.Component {
                     </label>
                 </div>
                 <button className="btn btn-lg btn-primary btn-block btn-user" type="submit">Sign in as User</button>
-                <button className="btn btn-lg btn-primary btn-block btn-admin" type="submit">Sign in as Admin</button>
+                <button className="btn btn-lg btn-primary btn-block btn-admin" type="submit">
+                  <div className="google-icon-wrapper">
+                    <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="gugul"/>
+                  </div>
+                  <p className="btn-text"><b>Sign in with google</b></p>
+                </button>
             </form>
         </div>
       );
