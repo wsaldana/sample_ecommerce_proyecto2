@@ -12,32 +12,27 @@ import "firebase/auth";
 import "firebase/firestore";
 
 //firebase config
-import './config/firebase.config';
+import {db} from './config/firebase.config';
+import Chat from "./components/Chat/Chat/Chat";
 
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
 
 export default class App extends Component {
 
 
-    SignIn = (email, pass) =>{
-        const auth = firebase.auth();
-
-        const promise = auth.createUserWithEmailAndPassword(email, pass)
-        promise.catch(e => console.log(e.message));
-    }
-
-    RegisterIn = (email, pass) =>{
-        const auth = firebase.auth();
-
-        const promise = auth.signInWithEmailAndPassword(email, pass)
-        promise.catch(e => console.log(e.message));
-    }
+    // SignIn = (email, pass) =>{
+    //     const promise = auth.createUserWithEmailAndPassword(email, pass)
+    //     promise.catch(e => console.log(e.message));
+    // }
+    //
+    // RegisterIn = (email, pass) => {
+    //     const promise = auth.signInWithEmailAndPassword(email, pass)
+    //     promise.catch(e => console.log(e.message));
+    // }
 
     render() {
         return (
             <div>
-                <Login credenciales = {this.SignIn} register = {this.RegisterIn}/>
+                <Chat chatId="3U1KybtBjT3DSRcx6xjl" />
             </div>
         )
     }
