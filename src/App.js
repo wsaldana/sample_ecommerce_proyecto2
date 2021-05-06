@@ -11,14 +11,9 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
-var firebaseConfig = {
-    apiKey: "AIzaSyCiIBhxCtGK1HyEbl8tlZmww6R2XOzs_-w",
-    authDomain: "usuariosweb-64078.firebaseapp.com",
-    projectId: "usuariosweb-64078",
-    storageBucket: "usuariosweb-64078.appspot.com",
-    messagingSenderId: "174839661815",
-    appId: "1:174839661815:web:25d0b439e46f7ea50d7ff2"
-  };
+//firebase config
+import './config/firebase.config';
+
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
