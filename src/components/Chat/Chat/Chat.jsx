@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import ChatInput from "../ChatInput/ChatInput";
 import Message from "../Message/Message";
 import "./Chat.css";
@@ -11,31 +11,31 @@ const Chat = (props) => {
   // TODO poner en algún lugar el estado del chat
   const [mensajes, setMensajes] = useState([]);
 
- const getMessages = async () => {
-   db.collection('chats').doc(props.chatId)
-     .collection('mensajes').orderBy('time')
-     .onSnapshot(snapshot => {
-       const mensajes = []
-       snapshot.forEach(coso => {
-         mensajes.push( coso.data() );
-       });
-       setMensajes(mensajes);
-      })
- }
 
- const sendMessages = async (text) => {
-   await db.collection('chats').doc(props.chatId)
-     .collection('mensajes').doc().set({
-       content: text,
-       sender: "io",
-       time: firebase.firestore.FieldValue.serverTimestamp(),
-     })
- }
+  const getMessages = async () => {
+    db.collection('chats').doc(props.chatId)
+      .collection('mensajes').orderBy('time')
+      .onSnapshot(snapshot => {
+        const mensajes = []
+        snapshot.forEach(coso => {
+          mensajes.push(coso.data());
+        });
+        setMensajes(mensajes);
+      })
+  }
+
+  const sendMessages = async (text) => {
+    await db.collection('chats').doc(props.chatId)
+      .collection('mensajes').doc().set({
+        content: text,
+        sender: "io",
+        time: firebase.firestore.FieldValue.serverTimestamp(),
+      })
+  }
 
   useEffect(() => {
     getMessages();
   }, []);
-
 
 
   return (
@@ -53,7 +53,7 @@ const Chat = (props) => {
           })
         }
       </div>
-      <ChatInput send={sendMessages} />
+      <ChatInput send={sendMessages}/>
 
     </div>
   );
