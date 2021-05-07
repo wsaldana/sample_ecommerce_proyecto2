@@ -1,5 +1,4 @@
 import React from "react";
-import { useHistory } from 'react-router-dom';
 import './style.css';
 
 import { FaSignInAlt } from "react-icons/fa";
@@ -19,7 +18,7 @@ class Login extends React.Component {
       this.props.register(x, y);
     }
 
-   async loginAdmin(username,password){
+    async loginAdmin(username,password){
       try {
           const endpoint = `http://localhost:5000/api/login?username=${username}&contrasena=${password}`;
           await fetch(endpoint)
@@ -28,7 +27,7 @@ class Login extends React.Component {
                 if(json.login === true){
                   this.setState({logged:true});
                   //Redirigir a AppAdmin
-                  //useHistory().push('/user');
+                  this.props.history.push('/admin');
                 }else{
                   this.setState({logged:false});
                 }
