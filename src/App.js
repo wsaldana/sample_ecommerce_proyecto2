@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import AppAdmin from './AppAdmin';
 import AppUser from './AppUser';
@@ -6,6 +6,9 @@ import Login from './components/Usuarios/Login/Login';
 
 //firebase config
 import { auth } from "./config/firebase.config";
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
 
 export default class App extends Component {
 
@@ -22,15 +25,16 @@ export default class App extends Component {
 
     render() {
         return (
-          <div>
-              <BrowserRouter>
-                  <Switch>
-                      <Route exact path="/" component={Login} />
-                      <Route path="/user" component={AppUser} />
-                      <Route path="/admin" component={AppAdmin} />
-                  </Switch>
-              </BrowserRouter>
-          </div>
+            <div>
+                <BrowserRouter>
+                    <Switch>
+                            <Route exact path="/" component={Login} />
+                            <Route path="/user" component={AppUser} />
+                            <Route path="/admin" component={AppAdmin} />
+                    </Switch>
+                </BrowserRouter>
+            </div>
         )
     }
 }
+//<Login credenciales = {this.SignIn} register = {this.RegisterIn}/> 
