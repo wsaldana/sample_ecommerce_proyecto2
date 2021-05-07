@@ -7,9 +7,6 @@ import Login from './components/Usuarios/Login/Login';
 //firebase config
 import { auth } from "./config/firebase.config";
 
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-
 export default class App extends Component {
 
 
@@ -37,4 +34,4 @@ export default class App extends Component {
         )
     }
 }
-//<Login credenciales = {this.SignIn} register = {this.RegisterIn}/> 
+//<Login credenciales = {this.SignIn} register = {this.RegisterIn}/>
