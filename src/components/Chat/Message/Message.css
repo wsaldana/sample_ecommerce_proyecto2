@@ -1,0 +1,23 @@
+.message-receiver, .message-sender {
+    padding: 10px;
+    margin-top: 3px;
+}
+
+.message-receiver {
+    align-self: flex-start;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.message-receiver:first-child, :not(.message-receiver) + .message-receiver {
+    border-top-left-radius: 20px;
+}
+
+
+.message-sender {
+    align-self: flex-end;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.message-sender:first-child, :not(.message-sender) + .message-sender {
+    border-top-right-radius: 20px;
+}

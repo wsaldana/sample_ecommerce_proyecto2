@@ -1,0 +1,18 @@
+.chat-input-bar {
+    flex: 0 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 -5px 5px #cecece;
+    padding: 10px;
+}
+
+.chat-input-message {
+    flex-grow: 1;
+    padding: 8px;
+    border-radius: 50px;
+    border: none;
+}
+.chat-input-message:focus {
+    outline: none;
+}
