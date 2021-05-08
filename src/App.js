@@ -10,10 +10,22 @@ import { auth } from "./config/firebase.config";
 
 export default class App extends Component {
 
+    gmailLog = (childData) => {
+        var provider = auth.GoogleAuthProvider();
+        auth().signInWithRedirect(provider)
 
-    SignIn = (email, pass) =>{
-        const promise = auth.createUserWithEmailAndPassword(email, pass)
-        promise.catch(e => console.log(e.message));
+        auth().getRedirectResult().then((result => {
+            if (result.credential) {
+                /** @type {firebase.auth.OAuthCredential} */
+                var credential = result.credential;
+          
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                var token = credential.accessToken;
+                // ...
+
+                auth().createUserWithEmailandPassword(result.user, result.password)                
+              }
+        }))
     }
 
     RegisterIn = (email, pass) => {
@@ -26,7 +38,7 @@ export default class App extends Component {
             <div>
                 <BrowserRouter>
                     <Switch>
-                            <Route exact path="/" component={Login} />
+                            <Route exact path="/" component={Login} render={props => <Login log = {this.gmailLog}/>}/>
                             <Route path="/user" component={AppUser} />
                             <Route path="/admin" component={AppAdmin} />
                             <Route path='/shop' component={Ecommerce} />

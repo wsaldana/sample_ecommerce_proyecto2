@@ -8,12 +8,8 @@ class Login extends React.Component {
       this.state = { logged:null }
     }
   
-    Credencial = (x, y) =>{
-      this.props.credenciales(x, y);
-    }
-
-    Registro = (x, y) =>{
-      this.props.register(x, y);
+    logear = (x) =>{
+      this.props.log(x);
     }
 
     async loginAdmin(username,password){
@@ -50,7 +46,7 @@ class Login extends React.Component {
                     // eslint-disable-next-line no-undef
                     onClick = { () => this.loginAdmin(document.getElementById("inputEmail").value, document.getElementById("inputPassword").value) } //() => this.Registro(document.getElementById("inputEmail").value, document.getElementById("inputPassword").value)
                 >Sign in as Admin</button>
-                <button className="btn btn-lg btn-primary btn-block btn-admin" type="submit" onClick = {() => this.Credencial(document.getElementById("inputEmail").value, document.getElementById("inputPassword").value)}>
+                <button className="btn btn-lg btn-primary btn-block btn-admin" type="submit" onClick = {() => this.logear()}>
                   <div className="google-icon-wrapper">
                     <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="gugul"/>
                   </div>
