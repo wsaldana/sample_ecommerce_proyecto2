@@ -1,8 +1,6 @@
 import React from "react";
 import './style.css';
 
-import { FaSignInAlt } from "react-icons/fa";
-
 class Login extends React.Component {
     constructor(props) {
       super(props);
@@ -20,6 +18,7 @@ class Login extends React.Component {
 
     async loginAdmin(username,password){
       try {
+          // CAMBIAR VALIDACION POR CONSULTA DE FIREBASE
           const endpoint = `http://localhost:5000/api/login?username=${username}&contrasena=${password}`;
           await fetch(endpoint)
               .then(results => results.json())
