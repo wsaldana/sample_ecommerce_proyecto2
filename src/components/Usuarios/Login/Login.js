@@ -26,7 +26,6 @@ class Login extends React.Component {
               .then(json => {
                 if(json.login === true){
                   this.setState({logged:true});
-                  //Redirigir a AppAdmin
                   this.props.history.push('/admin');
                 }else{
                   this.setState({logged:false});
