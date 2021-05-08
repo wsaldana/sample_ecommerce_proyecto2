@@ -1,5 +1,5 @@
 //import React from 'react';
-import wine from '../../assets/images/wine.jpg';
+import wine from '../../assets/images/vino.jpg';
 
 export const EcommerceData = [
     {
