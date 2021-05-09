@@ -1,15 +1,48 @@
 import React from "react";
 import './style.css';
+import { auth, firebase } from "../../../config/firebase.config";
 
 class Login extends React.Component {
     constructor(props) {
       super(props);
       this.props = props;
       this.state = { logged:null }
+      auth.onAuthStateChanged((user) => {
+        if(user){
+          console.log("logeado");
+          //DIRIGIR A LA PAGINA DE USUARIOS
+          props.history.push('/user');
+        }else{
+          console.log("nelson");
+        }
+      });
     }
   
-    logear = (x) =>{
-      this.props.log(x);
+    logear = () =>{
+      var provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithRedirect(provider);
+      auth
+        .getRedirectResult()
+        .then((result) => {
+          if (result.credential) {
+            /** @type {firebase.auth.OAuthCredential} */
+            var credential = result.credential;
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            var token = credential.accessToken;
+            console.log(result.operationType)
+          }
+          // The signed-in user info.
+          var user = result.user;
+          console.log("simon 2")
+        }).catch((error) => {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // The email of the user's account used.
+          var email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          var credential = error.credential;
+        });
     }
 
     async loginAdmin(username,password){

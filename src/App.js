@@ -10,7 +10,8 @@ import { auth } from "./config/firebase.config";
 
 export default class App extends Component {
 
-    gmailLog = (childData) => {
+    gmailLog = () => {
+        console.log("simon");
         var provider = auth.GoogleAuthProvider();
         auth().signInWithRedirect(provider)
 
@@ -38,7 +39,7 @@ export default class App extends Component {
             <div>
                 <BrowserRouter>
                     <Switch>
-                            <Route exact path="/" component={Login} render={props => <Login log = {this.gmailLog}/>}/>
+                            <Route exact path="/" render={(props) => <Login log = {() => this.gmailLog}/>}/>
                             <Route path="/user" component={AppUser} />
                             <Route path="/admin" component={AppAdmin} />
                             <Route path='/shop' component={Ecommerce} />
