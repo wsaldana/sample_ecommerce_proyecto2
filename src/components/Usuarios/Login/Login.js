@@ -7,17 +7,8 @@ class Login extends React.Component {
       super(props);
       this.props = props;
       this.state = { logged:null }
-      auth.onAuthStateChanged((user) => {
-        if(user){
-          console.log("logeado");
-          //DIRIGIR A LA PAGINA DE USUARIOS
-          props.history.push('/user');
-        }else{
-          console.log("nelson");
-        }
-      });
     }
-  
+
     logear = () =>{
       var provider = new firebase.auth.GoogleAuthProvider();
       auth.signInWithRedirect(provider);
@@ -79,7 +70,21 @@ class Login extends React.Component {
                     // eslint-disable-next-line no-undef
                     onClick = { () => this.loginAdmin(document.getElementById("inputEmail").value, document.getElementById("inputPassword").value) } //() => this.Registro(document.getElementById("inputEmail").value, document.getElementById("inputPassword").value)
                 >Sign in as Admin</button>
-                <button className="btn btn-lg btn-primary btn-block btn-admin" type="submit" onClick = {() => this.logear()}>
+                <button 
+                  className="btn btn-lg btn-primary btn-block btn-admin" 
+                  type="submit" 
+                  onClick = {() => {
+                    auth.onAuthStateChanged((user) => {
+                      if(user){
+                        console.log("logeado");
+                        //DIRIGIR A LA PAGINA DE USUARIOS
+                        this.props.history.push('/user');
+                      }else{
+                        this.logear()
+                      }
+                    });
+                  }
+                }>
                   <div className="google-icon-wrapper">
                     <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="gugul"/>
                   </div>
