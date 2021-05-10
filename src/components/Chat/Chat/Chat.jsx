@@ -3,24 +3,44 @@ import ChatInput from "../ChatInput/ChatInput";
 import Message from "../Message/Message";
 import "./Chat.css";
 
-import { db, firebase } from "../../../config/firebase.config";
+
+import { db, firebase, auth } from "../../../config/firebase.config";
+import ChatHeader from "../ChatHeader/ChatHeader";
 
 const Chat = (props) => {
 
-  // TODO cambiar el nombre del header del chat
-  // TODO poner en algún lugar el estado del chat
   const [mensajes, setMensajes] = useState([]);
+  const [chatState, setChatState] = useState("Finished");
+  const [chatName, setChatName] = useState("El Pepe");
+
+  const getChatInfo = async () => {
+    db.collection('chats').doc(props.chatId)
+      .onSnapshot((snapshot) => {
+        const { status, clientEmail, adminEmail } = snapshot.data();
+        setChatState(status);
+
+        if (adminEmail === auth.currentUser.email) {
+          setChatName(clientEmail.split('@')[0]);
+        } else {
+          setChatName(adminEmail.split('@')[0]);
+        }
+      })
+  }
 
 
   const getMessages = async () => {
     db.collection('chats').doc(props.chatId)
       .collection('mensajes').orderBy('time')
-      .onSnapshot(snapshot => {
+      .onSnapshot((snapshot) => {
         const mensajes = []
-        snapshot.forEach(coso => {
-          mensajes.push(coso.data());
+        snapshot.forEach(document => {
+          const documentData = document.data();
+          documentData.id = document.id;
+          mensajes.push(documentData);
         });
         setMensajes(mensajes);
+      }, (error) => {
+        console.log(error)
       })
   }
 
@@ -28,33 +48,32 @@ const Chat = (props) => {
     await db.collection('chats').doc(props.chatId)
       .collection('mensajes').doc().set({
         content: text,
-        sender: "io",
+        sender: auth.currentUser.uid,
         time: firebase.firestore.FieldValue.serverTimestamp(),
       })
   }
 
   useEffect(() => {
     getMessages();
-  }, []);
+    getChatInfo();
+  });
 
 
   return (
     <div className="chat-message-container">
-      <div className="chat-banner">
-        <h1 className="display-4">{"El Pepe"}</h1>
-      </div>
+      <ChatHeader title={chatName} chatState={chatState} />
       <div className="chat-message-container">
         {
           mensajes.map((mensaje) => {
             return <Message
-              isSender={false}
+              key={mensaje.id}
+              isSender={mensaje.sender === auth.currentUser.uid}
               content={mensaje.content}
             />
           })
         }
       </div>
       <ChatInput send={sendMessages}/>
-
     </div>
   );
 }

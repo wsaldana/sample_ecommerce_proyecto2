@@ -4,7 +4,9 @@ import "./ChatInput.css";
 export default class ChatInput extends React.Component {
   constructor(props) {
     super(props);
-    this.texto = "";
+    this.state = {
+       texto: "",
+    };
 
     this.handleSend = this.handleSend.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -13,7 +15,7 @@ export default class ChatInput extends React.Component {
 
   handleChange(e) {
     e.preventDefault();
-    this.texto = e.target.value;
+    this.setState({texto: e.target.value});
   }
 
   handleEnter(e) {
@@ -23,10 +25,12 @@ export default class ChatInput extends React.Component {
   }
 
   handleSend(e) {
+    const { texto } = this.state;
     e.preventDefault();
-    if (this.texto != null && this.texto.trim() !== ""){
-      this.props.send(this.texto);
-      // TODO vaciar el input del mensaje cuando se envía
+
+    if (texto != null && texto.trim() !== ""){
+      this.props.send(texto);
+      this.setState({ texto: "" })
     }
   }
 
@@ -39,6 +43,7 @@ export default class ChatInput extends React.Component {
           placeholder="Type something..."
           maxLength="140"
           onKeyDown={this.handleEnter}
+          value={this.state.texto}
         />
         <button className="btn btn-primary" onClick={this.handleSend}>
           <img
