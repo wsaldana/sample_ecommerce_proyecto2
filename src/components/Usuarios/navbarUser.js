@@ -42,6 +42,12 @@ function Navbar() {
                 </li>
               );
             })}
+            <button className='nav-text'
+              onClick={}
+            >
+              <AiIcons.AiOutlineUserDelete />
+              <span>Logout</span>
+            </button>
           </ul>
         </nav>
       </IconContext.Provider>

@@ -6,7 +6,14 @@ class Login extends React.Component {
     constructor(props) {
       super(props);
       this.props = props;
-      this.state = { logged:null }
+      this.state = { logged:null };
+    }
+
+    logout = async() => {
+      if(this.props.logout === true){
+        await auth.signOut();
+        //this.props.logout = false;
+      }
     }
 
     logear = () =>{
