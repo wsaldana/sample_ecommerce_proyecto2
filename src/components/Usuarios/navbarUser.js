@@ -5,6 +5,12 @@ import { Link } from 'react-router-dom';
 import { SidebarData } from './sidebarUser';
 import './navbarUser.css';
 import { IconContext } from 'react-icons';
+import { auth, firebase } from "../../config/firebase.config";
+
+
+function LogOut(){
+  auth.signOut()
+}
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
@@ -42,12 +48,12 @@ function Navbar() {
                 </li>
               );
             })}
-            <button className='nav-text'
-              onClick={}
-            >
-              <AiIcons.AiOutlineUserDelete />
-              <span>Logout</span>
-            </button>
+                <li className='nav-text'>
+                  <button onClick = {() => {LogOut()}}>
+                    <AiIcons.AiOutlineUserDelete />
+                    <span>Logout</span>
+                  </button>
+                </li>
           </ul>
         </nav>
       </IconContext.Provider>
