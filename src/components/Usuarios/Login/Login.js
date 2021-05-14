@@ -43,7 +43,7 @@ class Login extends React.Component {
         });
     }
 
-    async loginAdmin(username,password){
+    /*async loginAdmin(username,password){
       try {
           // CAMBIAR VALIDACION POR CONSULTA DE FIREBASE
           const endpoint = `http://localhost:5000/api/login?username=${username}&contrasena=${password}`;
@@ -60,6 +60,15 @@ class Login extends React.Component {
        } catch (e) {
            console.error(e);
        } 
+    }*/
+
+    loginAdmin = (username,password) =>{
+      console.log(username, password)
+      auth
+      .signInWithEmailAndPassword(username, password)
+      .then(userCredential => {
+        console.log('sign up')
+      })
     }
 
     render() {
