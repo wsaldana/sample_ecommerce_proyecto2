@@ -10,6 +10,9 @@ function Navbar() {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
+  const openCart = () =>{
+    //Se abre el carrito
+  }
 
   return (
     <>
@@ -17,6 +20,9 @@ function Navbar() {
         <div className='navbar'>
           <Link to='#' className='menu-bars'>
             <FaIcons.FaBars onClick={showSidebar} />
+          </Link>
+          <Link to='#' className='menu-cart'>
+            <AiIcons.AiOutlineShoppingCart onClick={openCart} />
           </Link>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>

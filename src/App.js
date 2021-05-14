@@ -1,14 +1,12 @@
-import React, { Component } from 'react'
-import AppAdmin from './AppAdmin';
-import AppUser from './AppUser';
-
+import React, { Component } from 'react';
 
 export default class App extends Component {
+
     render() {
         return (
             <div>
-                <AppUser />
             </div>
         )
     }
 }
+//<Login credenciales = {this.SignIn} register = {this.RegisterIn}/>
