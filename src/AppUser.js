@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './components/paginas/Users/homeUser';
 import Settings from './components/paginas/Users/settingsUser';
 import Logout from './components/paginas/Users/logoutUser';
-import Ecommerce from './components/Ecommerce/Ecommerce';
+import Ecommerce from './components/Ecommerce/Shop/Shop';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
