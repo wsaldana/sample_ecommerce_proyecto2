@@ -27,13 +27,23 @@ const Cart = () => {
 
     return(
         <div className="cartContainer">
-            <div className="cartProductcs">
+            <div className="cartProducts">
                 <div className="Header">
                     <h2>Shopping Cart</h2>
                     <h3>Items: {items.length}</h3>
                     <div className="separator"></div>
                 </div>
                 <div id="cartList" className="itemsToBuy">
+                    <ul>
+                        {order.map((item,index) =>{
+                            return(
+                                <div key={`${order.Title} + ${index}`} className='row cartProduct'>
+                                    <img src={order.img} className='col-12 align-middle inCartImg'></img>
+                                    <h2>{order.Title}</h2>
+                                </div>
+                            )
+                        })}
+                    </ul>
                 </div>
             </div>
 
@@ -43,7 +53,7 @@ const Cart = () => {
                     <div className="separator"></div>
                 </div>
                 <div className="summary">
-                    <h3>Items: {items.length}</h3>
+                    <h3>Items: {order.length}</h3>
                     <h3>Total: </h3>
                 </div>
             </div>

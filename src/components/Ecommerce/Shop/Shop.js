@@ -27,7 +27,7 @@ const Ecommerce = () => {
 
     }
 
-    const getCuantity = (index) =>{
+    const getQuantity = (index) =>{
         //Se revisa que la cantidad sea menor a la estipulada
         let inputField = document.getElementById(`qty-${index}`);
         let val = inputField.value;
@@ -55,7 +55,9 @@ const Ecommerce = () => {
 
     return (
         <div className='shopContainer'>
-            <h1 className='eShopTitle'>Productos</h1>
+            <header className='eShopHeader'>
+            <h1 className='eShopTitle'>Products</h1>
+            </header>
             <ul className='custom-ul'>
                 {products.map((datos, index) => {
                     return (
@@ -73,13 +75,13 @@ const Ecommerce = () => {
                                 <div className='col-6 align-middle margin-zero'>
                                     {datos.Qty > 0 ?
                                         <input id={`qty-${index}`} className='col-12 qtyInput' type='number' min='1' max={`${datos.Qty}`} 
-                                        autoComplete='off' defaultValue='1' onChange={() => getCuantity(index)} onKeyDown={() =>{return false}}/> :
+                                        autoComplete='off' defaultValue='1' onChange={() => getQuantity(index)} onKeyDown={() =>{return false}}/> :
                                         <input id={`qty-${index}`} className='col-12 qtyInput' type='number' min='0' max={`${datos.Qty}`} 
                                         autoComplete='off' defaultValue='0' disabled/>}
                                 </div>
                             </div>
                             {datos.Qty > 0 ? 
-                            <button id={`but-${index}`} type='button' onClick={() => addToCart(datos, getCuantity(index))}>Add to Cart (1)</button> :
+                            <button className='addBtn' id={`but-${index}`} type='button' onClick={() => addToCart(datos, getQuantity(index))}>Add to Cart (1)</button> :
                             <button type='button' disabled>Sold Out</button>
                             }
                         </div>

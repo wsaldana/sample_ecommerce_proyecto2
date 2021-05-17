@@ -32,6 +32,11 @@
     background-color: rgb(184, 184, 184);
 }
 
+.cartList{
+    width: fit-content;
+    height: fit-content;
+}
+
 .orderSummary{
     width: calc(30vw);
     height: calc(100vh);
