@@ -2,12 +2,15 @@
     list-style-type: none;
 }
 
+.margin-zero{
+    margin: 0%;
+}
+
 .shopContainer{
-    width: calc(100vw);
-    height: calc(100vh);
+   
     margin-left: auto;
     margin-right: auto;
-    overflow-y: auto;
+    overflow-y: hidden;
     overflow-x: hidden;
 }
 
@@ -19,13 +22,20 @@
 
 .eProductCard{
     display: flex;
-    cursor: pointer;
     border-radius: 5px;
-    margin: 1;
     height: 375px;
     width: 250px;
     box-shadow: 3px 3px 3px 3px #545454;
-    border: 1px solid black;
+}
+
+.disabled{
+    opacity: 50%;
+}
+
+.qtyInput{
+    overflow-y: hidden;
+    overflow-x: hidden;
+    text-align: center;
 }
 
 .productImage{

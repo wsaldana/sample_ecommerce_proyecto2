@@ -2,17 +2,18 @@ import React, {useEffect, useState} from 'react';
 import './Shop.css';
 import * as AiIcons from 'react-icons/ai';
 import { db, firebase } from "../../../config/firebase.config";
-import { Link } from 'react-router-dom';
-
-export const items = [];
+import { Link, useHistory } from 'react-router-dom';
 
 const Ecommerce = () => {
     const [products, setProducts] = useState([]);
+    
+    const history = useHistory();
+    
     const fetchProds = async() =>{
         const response = db.collection('products');
         const data = await response.get();
         data.docs.forEach(item =>{
-            setProducts(oldArray => [...oldArray,item.data()])
+            setProducts(oldArray => [...oldArray, item.data()])
         });
     }
 
@@ -20,29 +21,68 @@ const Ecommerce = () => {
         fetchProds();
     }, [])
 
-    const addToCart = (item) =>{
-        /*
-        let cart = document.getElementById("cartList");
-        let titulo = document.createElement("h1");
-        titulo.innerHTML = item.title;
-        cart.appendChild(titulo);*/
+    const addToCart = (item, cuantity) =>{
+        //Se envia la informacion del item seleccionado
+        history.push('/user/cart', [item, cuantity]);
+
+    }
+
+    const getCuantity = (index) =>{
+        //Se revisa que la cantidad sea menor a la estipulada
+        let inputField = document.getElementById(`qty-${index}`);
+        let val = inputField.value;
+        let numeric;
         
+        if(inputField.value === ''){
+            inputField.value = 1;
+        } 
+
+        try{
+            numeric = parseInt(inputField.value);
+            if(numeric > inputField.max){
+                inputField.value = inputField.max;
+            }
+        }
+        catch(error){
+            console.log(error);
+        }
+        finally{
+            //Se cambia el texto del boton
+            document.getElementById(`but-${index}`).innerHTML = `Add to Cart (${val})`;
+        }
+        return numeric;
     }
 
     return (
         <div className='shopContainer'>
             <h1 className='eShopTitle'>Productos</h1>
             <ul className='custom-ul'>
-                {products.map((datos) => {
+                {products.map((datos, index) => {
                     return (
-                        <li key = {datos.id} className='row eProductCard'>
-                            <img src={datos.img} className='col-12 productImage' alt='imagen'></img>
-                            <h2 className='col-12 productName'>{datos.title}</h2>
-                            <p className='col-12 prodDescription'>{datos.descr}</p>
-                            <h2 className='col-6 align-middle productPrice'>{datos.price}</h2>
-                            <AiIcons.AiOutlineShoppingCart className='col-6 align-middle eCart' />
-                            <button type='button' onClick={addToCart(datos)}>Agregar al Carrito</button>
-                        </li>
+                        <div key={`${datos.Title} + ${index}`} className={datos.Qty > 0 ? 'row eProductCard' : 'row eProductCard disabled'}>
+                            <img src={datos.img} className='col-12 align-middle productImage margin-zero' alt='imagen'></img>
+                            <div className='row align-items-center'>
+                                <h2 className='col productName margin-zero'>{datos.Title}</h2>
+                                <p className='col margin-zero'>{`${datos.Qty} in stock`}</p>
+                            </div>
+                            <div className='row align-items-center'>
+                                <p className='col-12 align-middle prodDescription margin-zero'>{datos.descr}</p>
+                            </div>
+                            <div className='row align-items-center margin-zero'>
+                                <h2 className='col-6 align-middle productPrice margin-zero'>{`$${datos.price}`}</h2>
+                                <div className='col-6 align-middle margin-zero'>
+                                    {datos.Qty > 0 ?
+                                        <input id={`qty-${index}`} className='col-12 qtyInput' type='number' min='1' max={`${datos.Qty}`} 
+                                        autoComplete='off' defaultValue='1' onChange={() => getCuantity(index)} onKeyDown={() =>{return false}}/> :
+                                        <input id={`qty-${index}`} className='col-12 qtyInput' type='number' min='0' max={`${datos.Qty}`} 
+                                        autoComplete='off' defaultValue='0' disabled/>}
+                                </div>
+                            </div>
+                            {datos.Qty > 0 ? 
+                            <button id={`but-${index}`} type='button' onClick={() => addToCart(datos, getCuantity(index))}>Add to Cart (1)</button> :
+                            <button type='button' disabled>Sold Out</button>
+                            }
+                        </div>
                     );
                 })}
             </ul>
@@ -50,4 +90,4 @@ const Ecommerce = () => {
     )
 }
 
-export default {Ecommerce, items};
+export default Ecommerce;
