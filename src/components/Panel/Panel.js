@@ -8,53 +8,36 @@ import { db, firebase, auth } from "./../../config/firebase.config";
 
 function Prueba() {
     const [elements, setElements] = useState([]);
-    /*
-    const getChat = async () => {
-        db.collection('chats').get().then(querySnapshot=>{
-            //const documents = querySnapshot.docs.map(doc=>doc.data())
-            const documents = querySnapshot.docs.map((doc)=>{
-
-                var id_client = doc.id
-                
-                
-                var chat_status = doc.data().status
-                
-                
-                var admEm = doc.data().adminEmail
-                
-                
-                var clientEm = doc.data().clientEmail
-                //elements.push(Usuarios(id_client,chat_status,clientEm))
-                //elements.push(Usuarios(id_client,chat_status,clientEm))
-               })
-            //console.log(documents[0].users[0])
-        })
-       
-          
-    }
-    */
+    //var elements = []
+    var oldElements = []
     const getUsers = async () => {
+        //setElements([])
         db.collection('chats').get().then((snapshot) => {
             snapshot.docs.forEach(doc => {
                 const InfoUser = doc.data()
                 InfoUser.id = doc.id
-                elements.push(InfoUser)
+               
+                setElements(elements.concat(InfoUser))
+                    
             })
-            setElements(elements)
+            //setElements(elements)
         })
 
     }
 
     useEffect(() => {
         //getChat();
-        //getUsers();
+        //setInterval(getUsers, 5000);
+        getUsers()
         console.log(elements)
+        console.log(oldElements)
+        
     });
     
-    getUsers();
     
     return (
         <div className="divCentral">
+            
             <ul>
 
                 {
