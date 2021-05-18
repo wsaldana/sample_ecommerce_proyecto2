@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 //import { Container, Row, Col } from 'react-bootstrap';
 import './grid.css';
-import User from './images/user.png';
+import Usuarios from './Usuario'
 import { db, firebase, auth } from "./../../config/firebase.config";
 
 
-var elements =[]
+
 function Prueba() {
-    
     const [elements, setElements] = useState([]);
+    /*
     const getChat = async () => {
         db.collection('chats').get().then(querySnapshot=>{
             //const documents = querySnapshot.docs.map(doc=>doc.data())
@@ -24,8 +24,7 @@ function Prueba() {
                 
                 
                 var clientEm = doc.data().clientEmail
-               
-                setElements(elements.push(Usuarios(id_client,chat_status,clientEm)))
+                //elements.push(Usuarios(id_client,chat_status,clientEm))
                 //elements.push(Usuarios(id_client,chat_status,clientEm))
                })
             //console.log(documents[0].users[0])
@@ -33,67 +32,45 @@ function Prueba() {
        
           
     }
+    */
+    const getUsers = async () => {
+        db.collection('chats').get().then((snapshot) => {
+            snapshot.docs.forEach(doc => {
+                const InfoUser = doc.data()
+                InfoUser.id = doc.id
+                elements.push(InfoUser)
+            })
+            setElements(elements)
+        })
+
+    }
+
     useEffect(() => {
-        getChat();
-        //getChats();
-        
-      });
-    console.log(elements)
+        //getChat();
+        //getUsers();
+        console.log(elements)
+    });
+    
+    getUsers();
+    
     return (
         <div className="divCentral">
             <ul>
-                {elements.map((value, index) => {
-                    return <div key={index}>{value}</div>
-                })}
+
+                {
+                    elements.map((doc) => {
+                        return <Usuarios
+                            key ={doc.id}
+                            clientEmail={doc.clientEmail}
+                            status={doc.status}
+                            id={doc.id}
+                        ></Usuarios>
+                    })}
             </ul>
         </div >
 
     )
-}
-
-function Usuarios(id,status,clientEm) {
-
-
-    return (
-        /*
-        <Container fluid className="grid">
-            <Row justify="between">
-                <Col className="Usuarios">
-
-                    <h1>User Name</h1>
-                    <p> CHAT</p>
-                    <img src={User} />
-
-
-
-                </Col>
-                <Col className="botones">
-
-                    <button className="btnEstado">
-                        START
-                    </button>
-                    <button className="btnIniciar">
-                        COMPLETED
-                    </button>
-                    <button className="btnFail">
-                        FAILED
-                    </button>
-                    <button className="btnHistory">
-                        HISTORY
-                    </button>
-
-                </Col>
-
-            </Row>
-
-
-
-        </Container>
-        */
-       <div>Hola {clientEm}</div>
-    )
 
 }
-
 
 export default Prueba;
