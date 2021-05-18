@@ -68,7 +68,9 @@ class Login extends React.Component {
       .signInWithEmailAndPassword(username, password)
       .then(userCredential => {
         console.log('sign up')
+        this.props.history.push('/admin');
       })
+
     }
 
     render() {
@@ -84,7 +86,8 @@ class Login extends React.Component {
                     className="btn btn-lg btn-primary btn-block btn-user" 
                     type="submit" 
                     // eslint-disable-next-line no-undef
-                    onClick = { () => this.loginAdmin(document.getElementById("inputEmail").value, document.getElementById("inputPassword").value) } //() => this.Registro(document.getElementById("inputEmail").value, document.getElementById("inputPassword").value)
+                    onClick = { () => 
+                      this.loginAdmin(document.getElementById("inputEmail").value, document.getElementById("inputPassword").value) } //() => this.Registro(document.getElementById("inputEmail").value, document.getElementById("inputPassword").value)
                 >Sign in as Admin</button>
                 <button 
                   className="btn btn-lg btn-primary btn-block btn-admin" 
