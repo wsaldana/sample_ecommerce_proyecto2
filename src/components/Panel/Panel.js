@@ -5,17 +5,8 @@ import User from './images/user.png';
 import { db, firebase, auth } from "./../../config/firebase.config";
 
 function Prueba() {
-    const [chatState, setChatState] = useState("Finished");
-    const getChats = async () => {
-        db.collection('chats').doc("3U1KybtBjT3DSRcx6xjl")
-          .onSnapshot((snapshot) => {
-            const { status, clientEmail, adminEmail } = snapshot.data();
-            setChatState(status);
     
-            
-          })
-          console.log(chatState)
-    }
+
     const getChat = async () => {
         db.collection('chats').get().then(querySnapshot=>{
             //const documents = querySnapshot.docs.map(doc=>doc.data())
