@@ -25,7 +25,7 @@ function Prueba() {
                 
                 var clientEm = doc.data().clientEmail
                
-                setElements(Usuarios(id_client,chat_status,clientEm))
+                setElements(elements.push(Usuarios(id_client,chat_status,clientEm)))
                 //elements.push(Usuarios(id_client,chat_status,clientEm))
                })
             //console.log(documents[0].users[0])
