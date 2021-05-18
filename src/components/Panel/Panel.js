@@ -4,27 +4,29 @@ import './grid.css';
 import User from './images/user.png';
 import { db, firebase, auth } from "./../../config/firebase.config";
 
-const elements =[]
 
+var elements =[]
 function Prueba() {
     
+    const [elements, setElements] = useState([]);
     const getChat = async () => {
         db.collection('chats').get().then(querySnapshot=>{
             //const documents = querySnapshot.docs.map(doc=>doc.data())
             const documents = querySnapshot.docs.map((doc)=>{
 
                 var id_client = doc.id
-                elements.push(id_client)
+                
                 
                 var chat_status = doc.data().status
-                elements.push(chat_status)
+                
                 
                 var admEm = doc.data().adminEmail
-                elements.push(admEm)
+                
                 
                 var clientEm = doc.data().clientEmail
-                elements.push(clientEm)
-
+               
+                setElements(Usuarios(id_client,chat_status,clientEm))
+                //elements.push(Usuarios(id_client,chat_status,clientEm))
                })
             //console.log(documents[0].users[0])
         })
@@ -33,10 +35,10 @@ function Prueba() {
     }
     useEffect(() => {
         getChat();
-        console.log(elements)
         //getChats();
+        
       });
-    
+    console.log(elements)
     return (
         <div className="divCentral">
             <ul>
@@ -49,7 +51,7 @@ function Prueba() {
     )
 }
 
-function Usuarios() {
+function Usuarios(id,status,clientEm) {
 
 
     return (
@@ -88,7 +90,7 @@ function Usuarios() {
 
         </Container>
         */
-       <div>Hola Mundo</div>
+       <div>Hola {clientEm}</div>
     )
 
 }
