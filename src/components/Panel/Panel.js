@@ -4,8 +4,44 @@ import './grid.css';
 import Usuarios from './Usuario'
 import { db, firebase, auth } from "./../../config/firebase.config";
 
+class Panel extends React.Component {
+  state = {
+      users:null
+  }
+  componentDidMount(){
+      console.log("Perroooooooooooos")
+      db.collection('chats').get()
+      .then(snapshot =>{
+          const usuarios = []
+          snapshot.forEach(doc=>{
+              const data = doc.data()
+              data.id = doc.id
+              usuarios.push(data)
+          })
+          this.setState({users:usuarios})
+      })
+  }
+  render(){
+      return(
+          <div>
+              {
+                  this.state.users &&
+                  this.state.users.map(data =>{
+                      return (
+                        <Usuarios 
+                        clientEmail={data.clientEmail}
+                        status={data.status}
+                        id={data.id}
+                        />
+                      )
+                  })
+              }
+          </div>
+      )
+  }
 
-
+}
+/*
 function Prueba() {
     const [elements, setElements] = useState([]);
     //var elements = []
@@ -57,3 +93,5 @@ function Prueba() {
 }
 
 export default Prueba;
+*/
+export default Panel;
