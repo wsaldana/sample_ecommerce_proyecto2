@@ -1,0 +1,61 @@
+.grid {
+  margin-top: auto;
+  background-color: white;
+  margin-left: 2vh;
+}
+.Usuarios {
+  background-color: grey;
+  margin-top: 2vh;
+  outline: solid black 1px;
+}
+.Usuarios img {
+  height: 20vh;
+}
+.botones {
+  margin-top: 2vh;
+}
+.btnEstado {
+  margin-right: 1vh;
+  background-color: #4075c7;
+  color: black;
+  margin: 1vh;
+  padding: 12px 28px;
+  border-radius: 12px;
+  border: none;
+  text-transform: uppercase;
+}
+.btnEstado:hover,
+.btnIniciar:hover,
+.btnFail:hover,
+.btnHistory:hover {
+  background-color: gray;
+  color: white;
+  cursor: pointer;
+}
+.btnIniciar {
+  margin-right: 1vh;
+  background-color: #4caf50;
+  color: black;
+  margin: 1vh;
+  padding: 12px 28px;
+  border-radius: 12px;
+  border: none;
+}
+.btnFail {
+  margin-right: 1vh;
+  background-color: #e7bc40;
+  color: black;
+  border: none;
+  margin: 1vh;
+  padding: 12px 28px;
+  border-radius: 12px;
+}
+.btnHistory {
+  margin-right: 1vh;
+  background-color: #7c7972;
+  color: black;
+  border: none;
+  margin: 1vh;
+  padding: 12px 28px;
+  border-radius: 12px;
+}

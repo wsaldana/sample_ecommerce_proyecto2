@@ -1,44 +1,79 @@
 import React, { useEffect, useState } from "react";
-//import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import './grid.css';
 import Usuarios from './Usuario'
 import { db, firebase, auth } from "./../../config/firebase.config";
+import './Panel.css';
 
 class Panel extends React.Component {
-  state = {
-      users:null
-  }
-  componentDidMount(){
-      console.log("Perroooooooooooos")
-      db.collection('chats').get()
-      .then(snapshot =>{
-          const usuarios = []
-          snapshot.forEach(doc=>{
-              const data = doc.data()
-              data.id = doc.id
-              usuarios.push(data)
-          })
-          this.setState({users:usuarios})
-      })
-  }
-  render(){
-      return(
-          <div>
-              {
-                  this.state.users &&
-                  this.state.users.map(data =>{
-                      return (
-                        <Usuarios 
-                        clientEmail={data.clientEmail}
-                        status={data.status}
-                        id={data.id}
-                        />
-                      )
-                  })
-              }
-          </div>
-      )
-  }
+    state = {
+        users: null
+    }
+    componentDidMount() {
+        console.log("Perroooooooooooos")
+        db.collection('chats').get()
+            .then(snapshot => {
+                console.log(snapshot)
+                const usuarios = []
+                snapshot.forEach(doc => {
+                    const data = doc.data()
+                    data.id = doc.id
+                    usuarios.push(data)
+                    console.log(data)
+                })
+                this.setState({ users: usuarios })
+                console.log(usuarios)
+            })
+    }
+    render() {
+        return (
+            <div>
+
+                {
+                    this.state.users &&
+                    this.state.users.map(data => {
+                        return (
+                            <Container fluid className="grid">
+                                <Row justify="between">
+                                    <Col className="Usuarios">
+
+                                        <h1>{data.clientEmail}</h1>
+
+
+
+
+
+                                    </Col>
+                                    <Col className="botones">
+
+                                        <button className="btnEstado">
+                                            {data.status}
+                                        </button>
+                                        <button className="btnHistory">
+                                            HISTORY
+                                        </button>
+
+
+
+                                    </Col>
+
+                                </Row>
+
+
+
+                            </Container>
+                            /*
+                            <Usuarios
+                                clientEmail={data.clientEmail}
+                                status={data.status}
+                                id={data.id}
+                            />*/
+                        )
+                    })
+                }
+            </div>
+        )
+    }
 
 }
 /*
