@@ -54,13 +54,13 @@ render() {
  
        </Container>
 
-
+        //NO borrar 
        <button onClick={()=>{this.setState({clicked:true})}} />
             {this.state.clicked ? <Chat chatID={this.state.id} /> : null}
        */
         <div>
             Hola {this.state.clientEmail}
-
+           
             
         </div>
 
