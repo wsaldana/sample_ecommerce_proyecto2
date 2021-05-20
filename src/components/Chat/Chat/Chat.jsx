@@ -7,11 +7,15 @@ import "./Chat.css";
 import { db, firebase, auth } from "../../../config/firebase.config";
 import ChatHeader from "../ChatHeader/ChatHeader";
 
+
+let counterTimer = 0;
+
 const Chat = (props) => {
 
   const [mensajes, setMensajes] = useState([]);
   const [chatState, setChatState] = useState("Finished");
-  const [chatName, setChatName] = useState("El Pepe");
+  const [chatName, setChatName] = useState("Cargando...");
+
 
   const getChatInfo = async () => {
     db.collection('chats').doc(props.chatId)
@@ -24,7 +28,7 @@ const Chat = (props) => {
         } else {
           setChatName(adminEmail.split('@')[0]);
         }
-      })
+      });
   }
 
 
@@ -33,30 +37,47 @@ const Chat = (props) => {
       .collection('mensajes').orderBy('time')
       .onSnapshot((snapshot) => {
         const mensajes = []
+        
         snapshot.forEach(document => {
           const documentData = document.data();
           documentData.id = document.id;
           mensajes.push(documentData);
         });
         setMensajes(mensajes);
+        setTimerr();
       }, (error) => {
         console.log(error)
-      })
+      });
   }
 
   const sendMessages = async (text) => {
+   
     await db.collection('chats').doc(props.chatId)
       .collection('mensajes').doc().set({
         content: text,
         sender: auth.currentUser.uid,
         time: firebase.firestore.FieldValue.serverTimestamp(),
-      })
+      });
+      setTimerr();
+  }
+
+  const setFinalizado = (state) => {
+    if (counterTimer === state){
+      alert('Se termino el tiempo');
+    }
+  };
+
+  const setTimerr = () => {
+    const t = counterTimer + 1;
+    setTimeout(()=>setFinalizado(t), 10000);
+    counterTimer = t;
   }
 
   useEffect(() => {
     getMessages();
     getChatInfo();
-  });
+    setTimerr();
+  }, []);
 
 
   return (
