@@ -32,43 +32,42 @@ class Panel extends React.Component {
                 {
                     this.state.users &&
                     this.state.users.map(data => {
-                        return (
-                            <Container fluid className="grid">
-                                <Row justify="between">
-                                    <Col className="Usuarios">
+                        if (data.status = "in progress") {
+                            console.log("FUNCIONA")
+                            return (
+                                <Container fluid className="grid">
+                                    <Row justify="between">
+                                        <Col className="Usuarios">
 
-                                        <h1>{data.clientEmail}</h1>
-
-
-
-
-
-                                    </Col>
-                                    <Col className="botones">
-
-                                        <button className="btnEstado">
-                                            {data.status}
-                                        </button>
-                                        <button className="btnHistory">
-                                            HISTORY
-                                        </button>
+                                            <h1>{data.clientEmail}</h1>
 
 
 
-                                    </Col>
-
-                                </Row>
 
 
+                                        </Col>
+                                        <Col className="botones">
 
-                            </Container>
-                            /*
-                            <Usuarios
-                                clientEmail={data.clientEmail}
-                                status={data.status}
-                                id={data.id}
-                            />*/
-                        )
+                                            <button className="btnEstado">
+                                                {data.status}
+                                            </button>
+                                            <button className="btnHistory">
+                                                HISTORY
+                                            </button>
+
+
+
+                                        </Col>
+
+                                    </Row>
+
+
+
+                                </Container>
+                            )
+
+                        }
+
                     })
                 }
             </div>
@@ -76,6 +75,9 @@ class Panel extends React.Component {
     }
 
 }
+
+
+
 /*
 function Prueba() {
     const [elements, setElements] = useState([]);
