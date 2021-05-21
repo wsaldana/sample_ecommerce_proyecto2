@@ -32,7 +32,7 @@ class Panel extends React.Component {
                 {
                     this.state.users &&
                     this.state.users.map(data => {
-                        if (data.status = "in progress") {
+                        if (data.status == "in progress") {
                             console.log("FUNCIONA")
                             return (
                                 <Container fluid className="grid">
@@ -48,7 +48,7 @@ class Panel extends React.Component {
                                         </Col>
                                         <Col className="botones">
 
-                                            <button className="btnEstado">
+                                            <button className="btnIniciar">
                                                 {data.status}
                                             </button>
                                             <button className="btnHistory">
@@ -66,6 +66,58 @@ class Panel extends React.Component {
                                 </Container>
                             )
 
+                        } if (data.status == "fail") {
+                            console.log("DEBERIA DE SEGUIR FUNCIONANDO")
+                            return (
+                                <Container fluid className="grid">
+                                    <Row justify="between">
+                                        <Col className="Usuarios">
+
+                                            <h1>{data.clientEmail}</h1>
+
+                                        </Col>
+                                        <Col className="botones">
+
+                                            <button className="btnFail">
+                                                {data.status}
+                                            </button>
+                                            <button className="btnHistory">
+                                                HISTORY
+                                            </button>
+
+                                        </Col>
+
+                                    </Row>
+
+                                </Container>
+
+                            )
+
+                        } if (data.status == "completed") {
+                            console.log("CONTINUA FUNCIONANDO")
+                            return (
+                                <Container fluid className="grid">
+                                    <Row justify="between">
+                                        <Col className="Usuarios">
+
+                                            <h1>{data.clientEmail}</h1>
+
+                                        </Col>
+                                        <Col className="botones">
+
+                                            <button className="btnCompleted">
+                                                {data.status}
+                                            </button>
+                                            <button className="btnHistory">
+                                                HISTORY
+                                            </button>
+
+                                        </Col>
+
+                                    </Row>
+
+                                </Container>
+                            )
                         }
 
                     })
