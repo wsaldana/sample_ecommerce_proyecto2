@@ -9,14 +9,13 @@ import ChatHeader from "../ChatHeader/ChatHeader";
 
 
 let counterTimer = 0;
-
+let terminado = false;
 const Chat = (props) => {
 
   const [mensajes, setMensajes] = useState([]);
-  const [chatState, setChatState] = useState("Finished");
+  const [inputState, setInputState] = useState(false);
+  const [chatState, setChatState] = useState("in progress");
   const [chatName, setChatName] = useState("Cargando...");
-
-
   const getChatInfo = async () => {
     db.collection('chats').doc(props.chatId)
       .onSnapshot((snapshot) => {
@@ -61,9 +60,15 @@ const Chat = (props) => {
       setTimerr();
   }
 
-  const setFinalizado = (state) => {
-    if (counterTimer === state){
-      alert('Se termino el tiempo');
+  const setFinalizado = async (state) => {
+    if ((counterTimer === state) && (!terminado)){
+      console.log(terminado)
+      alert('Se ha terminado el tiempo del chat');
+      setChatState("Finished");
+
+      await db.collection('chats').doc(props.chatId).update({
+        status:"Finished",
+      });
     }
   };
 
@@ -77,7 +82,18 @@ const Chat = (props) => {
     getMessages();
     getChatInfo();
     setTimerr();
+    setInputState(chatState === "Finished");
+    
+
   }, []);
+
+
+  useEffect(() => {
+    
+    setInputState(chatState === "Finished");
+    terminado = chatState === "Finished";
+    
+  }, [chatState]);
 
 
   return (
@@ -94,7 +110,7 @@ const Chat = (props) => {
           })
         }
       </div>
-      <ChatInput send={sendMessages}/>
+      <ChatInput send={sendMessages} estado={inputState}/>
     </div>
   );
 }
