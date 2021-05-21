@@ -82,7 +82,7 @@ const Chat = (props) => {
 
   const setTimerr = () => {
     const t = counterTimer + 1;
-    setTimeout(()=>setFinalizado(t), 10000);
+    setTimeout(()=>setFinalizado(t), 300000);
     counterTimer = t;
   }
 
