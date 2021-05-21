@@ -5,8 +5,9 @@ import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import AppAdmin from './AppAdmin';
 import AppUser from './AppUser';
 import Login from './components/Usuarios/Login/Login';
-import Ecommerce from './components/Ecommerce/Ecommerce';
-import Panel from './components/Panel/Panel';
+import Ecommerce from './components/Ecommerce/Shop/Shop';
+import Cart from './components/Ecommerce/Cart/Cart';
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -15,7 +16,7 @@ ReactDOM.render(
           <Route path="/user" component={AppUser} />
           <Route path="/admin" component={AppAdmin} />
           <Route path='/shop' component={Ecommerce} />
-          <Route path='/panel' component={Panel} />
+          <Route path='/cart' component={Cart} />
         </Switch>
     </BrowserRouter>
   </React.StrictMode>,

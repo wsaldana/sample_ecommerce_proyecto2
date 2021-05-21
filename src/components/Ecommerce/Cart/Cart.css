@@ -1,0 +1,50 @@
+.cartContainer{
+    width: calc(100vw);
+    height: calc(100vh);
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.cartProducts{
+    width: calc(70vw);
+    height: calc(100vh);
+}
+
+.Header{
+    width: 80%;
+    height: calc(10vh);
+    margin-left: 10%;
+    margin-top: calc(3vh);
+}
+
+.Header h3{
+    font-size: 20px;
+    position: relative;
+    left: 70%;
+}
+
+.separator{
+    width: 80%;
+    height: 1px;
+    background-color: rgb(184, 184, 184);
+}
+
+.cartList{
+    width: fit-content;
+    height: fit-content;
+}
+
+.orderSummary{
+    width: calc(30vw);
+    height: calc(100vh);
+    background-color: rgb(233, 233, 233);
+}
+
+.summary h3{
+    font-size: 24px;
+    position: relative;
+    left: 10%;
+}
