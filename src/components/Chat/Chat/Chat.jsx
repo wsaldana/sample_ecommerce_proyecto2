@@ -46,6 +46,8 @@ const Chat = (props) => {
         setTimerr();
       }, (error) => {
         console.log(error)
+        alert("Ha habido un error con la conexión")
+        
       });
   }
 
@@ -56,7 +58,10 @@ const Chat = (props) => {
         content: text,
         sender: auth.currentUser.uid,
         time: firebase.firestore.FieldValue.serverTimestamp(),
-      });
+      }).catch(error => {
+        alert("Ha habido un error con la conexión")
+        throw new Error('Error: Getting document:');
+    })
       setTimerr();
   }
 
@@ -65,10 +70,13 @@ const Chat = (props) => {
       console.log(terminado)
       alert('Se ha terminado el tiempo del chat');
       setChatState("Finished");
-
       await db.collection('chats').doc(props.chatId).update({
         status:"Finished",
-      });
+      })
+      .catch(error => {
+        alert("Ha habido un error con la conexión")
+        throw new Error('Error: Updating document:');
+    })
     }
   };
 
