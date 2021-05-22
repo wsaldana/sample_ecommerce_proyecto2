@@ -20,6 +20,4 @@ export const SidebarData = [
     icon: <AiIcons.AiOutlineUserDelete />,
     cName: 'nav-text'
   },*/
-  
-  
 ];

@@ -9,14 +9,7 @@ class Login extends React.Component {
       this.state = { logged:null };
     }
 
-    logout = async() => {
-      if(this.props.logout === true){
-        await auth.signOut();
-        //this.props.logout = false;
-      }
-    }
-
-    logear = () =>{
+    logear = async() =>{
       var provider = new firebase.auth.GoogleAuthProvider();
       auth.signInWithRedirect(provider);
       auth
@@ -32,6 +25,7 @@ class Login extends React.Component {
           // The signed-in user info.
           var user = result.user;
           console.log("simon 2")
+          this.props.history.push("/user")
         }).catch((error) => {
           // Handle Errors here.
           var errorCode = error.code;
@@ -92,7 +86,7 @@ class Login extends React.Component {
                 <button 
                   className="btn btn-lg btn-primary btn-block btn-admin" 
                   type="submit" 
-                  onClick = {() => {
+                  onClick = {async() => {
                     auth.onAuthStateChanged((user) => {
                       if(user){
                         console.log("logeado");
@@ -100,6 +94,7 @@ class Login extends React.Component {
                         this.props.history.push('/user');
                       }else{
                         this.logear()
+                        alert("Aqui")
                       }
                     });
                   }
