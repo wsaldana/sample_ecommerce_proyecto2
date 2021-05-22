@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { SidebarData } from './sidebarUser';
 import './navbarUser.css';
 import { IconContext } from 'react-icons';
@@ -9,10 +9,10 @@ import { auth, firebase } from "../../config/firebase.config";
 
 
 function LogOut(){
-  auth.signOut()
+
 }
 
-function Navbar() {
+function Navbar(props) {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
@@ -49,7 +49,10 @@ function Navbar() {
               );
             })}
                 <li className='nav-text'>
-                  <button onClick = {() => {LogOut()}}>
+                  <button onClick = {() => {
+                      auth.signOut()
+                      props.history.push("/")
+                  }}>
                     <AiIcons.AiOutlineUserDelete />
                     <span>Logout</span>
                   </button>
@@ -61,4 +64,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default withRouter(Navbar);
