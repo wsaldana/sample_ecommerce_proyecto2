@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800');
+*{
+    box-sizing: border-box;
+}
+
+ body{
+    background-color: #1C8EF9;
+    min-height: 100vh;
+    display: flex;
+    font-weight: 400;
+    font-family: 'Fira Sans', sans-serif;
+    
+    overflow-y: hidden;
+    
+
+} 
+
+
+h1,h2,h3,h4,h5,h6,label,span{
+    font-weight: 500;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+body, html, .App, #root, .auth-wrapper{
+    width: 100%;
+    height: 100%;
+
+
+}
+
+.navbar-light{
+    background-color: #ffffff;
+    box-shadow: 0px 14px 80px rgba(34,35,58,0.2);
+}
+
+.auth-wrapper{
+    margin-top: 50;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: left;
+
+}
+
+.auth-inner{
+    width: 200px;
+    margin: auto;
+    background: #ffffff;
+    box-shadow: 0px 14px 80px rgba(34,35,58,0.2);
+    padding: 70px 55px 45px 55px;
+    border-radius: 15px;
+    transition: all .3s;
+}
+.auth-inner > h3{
+    margin-top: 30px;
+    text-align: center;
+}
+
+.auth-inner > label{
+    margin-top: 30px;
+    font-weight: 100px;
+    text-align: center;
+}
+.txt{
+    margin-top: 15px;
+}
+
+.btn{
+    margin-top: 30px;
+    justify-content: center;
+}
+.form-group > pass{
+
+    text-align: center;
+    margin-top : 100;
+    line-height: 1;
+    padding-bottom: 20px;
+}
+
+.auth-wrapper h3{
+    text-align: center;
+    margin: 0;
+    line-height: 1;
+    padding-bottom: 20px;
+}
+
+.custom-control-label{
+    font-weight: 400;
+}
+
+.forgot-password,
+.forgot-password a {
+    text-align: right;
+    font-size: 13px;
+    padding-top: 10px;
+    color: #7f7d7d;
+    margin: 0;  
+}
+
+.forgot-password a {
+    color: #167bff;
+}
+
+.form{
+    margin-top: 100px;
+}
+.form > h3{
+    text-align: center;
+
+}
+
+.form > label2{
+    text-align: center;
+}
+
+
+
+.must-container{
+    margin-bottom: 1em;
+    border: 0.1em solid #073B4C;
+}
+
+.must-item{
+    position: relative;
+
+    width: 15em;
+    height: 1em;
+
+    padding: 0.2em 0;
+
+    border-bottom: 0.1em solid #073B4C;
+    background-color: #DAF3FC;
+}
+
+.must-text{
+    position: absolute;
+    z-index: 0;
+    top: 0.6em;
+    left: 1em;
+
+    width: 100%;
+
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+}
+
+.must-line{
+    position: absolute;
+    z-index: 1;
+    top: 0.5em;
+
+    width: 0;
+    height: 0.2em;
+
+    background-color: #EF476F;
+
+    transition: 0.5s;
+}
+
+.cross-out{
+    width: 100%;
+}
