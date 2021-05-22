@@ -26,6 +26,7 @@ const Chat = (props) => {
           setChatName(clientEmail.split('@')[0]);
         } else {
           setChatName(adminEmail.split('@')[0]);
+          //aquí trigger si es admin
         }
       });
   }
@@ -82,7 +83,7 @@ const Chat = (props) => {
 
   const setTimerr = () => {
     const t = counterTimer + 1;
-    setTimeout(()=>setFinalizado(t), 300000);
+    setTimeout(()=>setFinalizado(t), 200000);
     counterTimer = t;
   }
 
@@ -90,7 +91,7 @@ const Chat = (props) => {
     getMessages();
     getChatInfo();
     setTimerr();
-    setInputState(chatState === "Finished");
+    //setInputState(chatState === "Finished");
     
 
   }, []);
@@ -98,8 +99,8 @@ const Chat = (props) => {
 
   useEffect(() => {
     
-    setInputState(chatState === "Finished");
-    terminado = chatState === "Finished";
+    setInputState((chatState === "Finished")||(chatState === "completed")||(chatState === "fail"));
+    terminado = ((chatState === "Finished")||(chatState === "completed")||(chatState === "fail"));
     
   }, [chatState]);
 
