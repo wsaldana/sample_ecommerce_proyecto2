@@ -40,11 +40,6 @@ class Panel extends React.Component {
                                         <Col className="Usuarios">
 
                                             <h1>{data.clientEmail}</h1>
-
-
-
-
-
                                         </Col>
                                         <Col className="botones">
 
@@ -54,68 +49,46 @@ class Panel extends React.Component {
                                             <button className="btnHistory">
                                                 HISTORY
                                             </button>
-
-
-
                                         </Col>
-
                                     </Row>
-
-
-
                                 </Container>
                             )
-
                         } if (data.status == "fail") {
                             console.log("DEBERIA DE SEGUIR FUNCIONANDO")
                             return (
                                 <Container fluid className="grid">
                                     <Row justify="between">
                                         <Col className="Usuarios">
-
                                             <h1>{data.clientEmail}</h1>
-
                                         </Col>
                                         <Col className="botones">
-
                                             <button className="btnFail">
                                                 {data.status}
                                             </button>
                                             <button className="btnHistory">
                                                 HISTORY
                                             </button>
-
                                         </Col>
-
                                     </Row>
-
                                 </Container>
-
                             )
-
                         } if (data.status == "completed") {
                             console.log("CONTINUA FUNCIONANDO")
                             return (
                                 <Container fluid className="grid">
                                     <Row justify="between">
                                         <Col className="Usuarios">
-
                                             <h1>{data.clientEmail}</h1>
-
                                         </Col>
                                         <Col className="botones">
-
                                             <button className="btnCompleted">
                                                 {data.status}
                                             </button>
                                             <button className="btnHistory">
                                                 HISTORY
                                             </button>
-
                                         </Col>
-
                                     </Row>
-
                                 </Container>
                             )
                         }
@@ -128,59 +101,4 @@ class Panel extends React.Component {
 
 }
 
-
-
-/*
-function Prueba() {
-    const [elements, setElements] = useState([]);
-    //var elements = []
-    var oldElements = []
-    const getUsers = async () => {
-        //setElements([])
-        db.collection('chats').get().then((snapshot) => {
-            snapshot.docs.forEach(doc => {
-                const InfoUser = doc.data()
-                InfoUser.id = doc.id
-               
-                setElements(elements.concat(InfoUser))
-                    
-            })
-            //setElements(elements)
-        })
-
-    }
-
-    useEffect(() => {
-        //getChat();
-        //setInterval(getUsers, 5000);
-        getUsers()
-        console.log(elements)
-        console.log(oldElements)
-        
-    });
-    
-    
-    return (
-        <div className="divCentral">
-            
-            <ul>
-
-                {
-                    elements.map((doc) => {
-                        return <Usuarios
-                            key ={doc.id}
-                            clientEmail={doc.clientEmail}
-                            status={doc.status}
-                            id={doc.id}
-                        ></Usuarios>
-                    })}
-            </ul>
-        </div >
-
-    )
-
-}
-
-export default Prueba;
-*/
 export default Panel;
