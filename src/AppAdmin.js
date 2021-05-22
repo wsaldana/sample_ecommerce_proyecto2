@@ -15,7 +15,7 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
-          <Route path='/' exact component={Home} /> 
+          <Route path='/admin' exact component={Home} /> 
           <Route path='/reports' component={Reports} />
           <Route path='/settings' component={Settings} />
           <Route path='/logout' component={Logout} />
