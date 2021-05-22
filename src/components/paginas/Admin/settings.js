@@ -1,7 +1,4 @@
-
-import { ScrollView, StyleSheet, Text, View, TextInput, Button, Linking, Alert, } from 'react-native';
-
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import './settings.css';
 import { auth, firebase } from "../../../config/firebase.config";
 
@@ -33,8 +30,8 @@ export default class  Settings extends React.Component {
 
    // this.reauth(this.state.currentPassword).then(() =>{
       var user  = firebase.auth().currentUser;
-    user.updatePassword(this.state.newPassword).then(()=>{
-      Alert.alert("Password was changed");
+    user.updatePassword(document.getElementById("inputPassword").value).then(()=>{
+      alert("Password was changed");
       console.log('password was changed')
     }).catch((error)=> { console.log(error.message);});
     //}).catch((error) => { console.log(error.message)});
@@ -53,12 +50,11 @@ export default class  Settings extends React.Component {
 
               <label className="label">New Password</label>
               <div className = "txt">
-              <TextInput className = "pass" type = "password" value ={this.state.newPassword} placeholder =  "Enter Password" 
-           secureTextEntry={true} onChangeText={(text) => {this.setState ({newPassword:  text})}} ></TextInput>
+              <input className = "pass" id="inputPassword" type = "password" placeholder =  "Enter Password" />
             </div>
 
         <div className = "btn">
-      <Button  title="Change Password" onPress={this.onChangePassword} />
+      <button onClick={()=>this.onChangePassword()} >Change Password</button>
       </div>
     </div>
     </div>
