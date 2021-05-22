@@ -16,7 +16,7 @@ function App() {
         
         <Switch>
           {/*<Route path='/logout' render={(props) => <Login {...props} logout={true} />}/>*/}
-          <Route path='/logout' component={Login} />
+          <Route exact path='/' component={Login} />
           <Navbar />
           <Route path='/settings' component={Settings} />
           <Route path='/home' component={Ecommerce} />
