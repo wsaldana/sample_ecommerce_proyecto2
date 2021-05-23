@@ -19,8 +19,9 @@ function Navbar(props) {
 
   const logout = () => {
     auth.signOut().then(()=>{
-      props.history.push("/")
-      console.log("IDLE orale")
+      props.history.push("/");
+      console.log("IDLE orale");
+      window.location.reload();
     })
   }
 
@@ -60,10 +61,11 @@ function Navbar(props) {
                 <li className='nav-text'>
                   <button onClick = {() => {
                       auth.signOut().then(()=>{
-                        console.log("logout usuario")
-                        console.log(auth.currentUser)
-                        props.history.push("/")
-                      })
+                        console.log("logout usuario");
+                        console.log(auth.currentUser);
+                        props.history.push("/");
+                        window.location.reload();
+                      });
                   }}>
                     <AiIcons.AiOutlineUserDelete />
                     <span>Logout</span>
