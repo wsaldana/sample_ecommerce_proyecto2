@@ -12,7 +12,10 @@ const loginAdmin = (username,password, props) => {
     .signInWithEmailAndPassword(username, password)
     .then(userCredential => {
       console.log('sign up')
-    })
+    }).catch((error) => {
+        var errorMessage = error.message;
+        alert(errorMessage)
+    });
 
 }
 
