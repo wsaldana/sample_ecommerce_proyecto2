@@ -4,6 +4,7 @@ import './grid.css';
 import Usuarios from './Usuario'
 import { db, firebase, auth } from "./../../config/firebase.config";
 import './Panel.css';
+import Chat from '../Chat/Chat/Chat.jsx';
 
 class Panel extends React.Component {
     state = {
@@ -25,6 +26,7 @@ class Panel extends React.Component {
                 console.log(usuarios)
             })
     }
+
     render() {
         return (
             <div>
@@ -42,9 +44,10 @@ class Panel extends React.Component {
                                             <h1>{data.clientEmail}</h1>
                                         </Col>
                                         <Col className="botones">
-
-                                            <button className="btnIniciar">
+                                            <button className="btnIniciar"> 
+                                            {/* onClick={handleClick(data.id)}> */}
                                                 {data.status}
+                                                {/* <Chat chatId={D3dwXmbrFtYXIeHlgu89} /> */}
                                             </button>
                                             <button className="btnHistory">
                                                 HISTORY
@@ -92,6 +95,12 @@ class Panel extends React.Component {
                                 </Container>
                             )
                         }
+
+                        /* function handleClick(chat_id){
+                            return (
+                                <Chat chatId={chat_id} />
+                              );
+                        } */
 
                     })
                 }
