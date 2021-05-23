@@ -4,13 +4,13 @@ import * as AiIcons from 'react-icons/ai';
 export const SidebarData = [
   {
     title: 'Home',
-    path: '/user',
-    icon: <AiIcons.AiFillShopping />,
+    path: '/user/shop',
+    icon: <AiIcons.AiFillHome />,
     cName: 'nav-text'
   },
   {
     title: 'Settings',
-    path: '/settings',
+    path: '/user/settings',
     icon: <AiIcons.AiTwotoneSetting />,
     cName: 'nav-text'
   }/*,

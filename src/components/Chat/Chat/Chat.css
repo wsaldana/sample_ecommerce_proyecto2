@@ -5,15 +5,6 @@
     flex-flow: column;
 }
 
-.chat-banner {
-    flex: 0 1 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 10px #cecece;
-    padding: 15px;
-}
-
 .chat-message-container {
     flex: 1 1 auto;
     display: flex;

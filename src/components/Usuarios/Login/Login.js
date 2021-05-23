@@ -26,7 +26,7 @@ class Login extends React.Component {
           // The signed-in user info.
           var user = result.user;
           console.log("simon 2")
-          this.props.history.push("/user")
+          this.props.history.push("/user/shop")
         }).catch((error) => {
           // Handle Errors here.
           var errorCode = error.code;

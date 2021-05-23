@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, useHistory, useLocation } from 'react-router-dom';
 import { SidebarData } from './sidebarUser';
 import './navbarUser.css';
 import { IconContext } from 'react-icons';
@@ -13,9 +13,19 @@ function Navbar(props) {
   const idleTimerRef = useRef(null)
 
   const showSidebar = () => setSidebar(!sidebar);
-  const openCart = () =>{
-    //Se abre el carrito
-    console.log(auth.currentUser)
+
+  const history = useHistory();
+  const currentLocation = useLocation();
+
+  const showCart = () =>{
+    //Se abre o cierra el carrito
+    if(currentLocation.pathname !== '/user/cart'){
+      history.push('/user/cart');
+    }
+    else if(currentLocation.pathname === '/user/cart'){
+      history.goBack();
+      history.goBack();
+    }
   }
 
   const logout = () => {
@@ -45,8 +55,8 @@ function Navbar(props) {
           <Link to='#' className='menu-bars'>
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
-          <Link to='#' className='menu-cart'>
-            <AiIcons.AiOutlineShoppingCart onClick={openCart} />
+          <Link to='/user/cart' className='menu-cart'>
+            <AiIcons.AiOutlineShoppingCart onClick={showCart} />
           </Link>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>

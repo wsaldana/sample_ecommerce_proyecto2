@@ -4,7 +4,9 @@ import Navbar from './components/Usuarios/navbarUser';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Settings from './components/paginas/Users/settingsUser';
 import Login from './components/Usuarios/Login/Login';
-import Ecommerce from './components/Ecommerce/Ecommerce';
+//import Ecommerce from './components/Ecommerce/Ecommerce';
+import Shop from './components/Ecommerce/Shop/Shop';
+import Cart from './components/Ecommerce/Cart/Cart';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
@@ -14,12 +16,12 @@ function App() {
     <>
       <Router>
         <Switch>
-          {/*<Route path='/logout' render={(props) => <Login {...props} logout={true} />}/>*/}
           <Route exact path='/' component={Login} />
           <div>
             <Navbar />
-            <Route path='/settings' component={Settings} />
-            <Route path='/user' component={Ecommerce} />
+            <Route path='/user/settings' component={Settings} />
+            <Route path='/user/shop' component={Shop} />
+            <Route path='/user/cart' component={Cart} />
           </div>
         </Switch>
       </Router>
