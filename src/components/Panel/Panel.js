@@ -33,9 +33,11 @@ class Panel extends React.Component {
         const increment = firebase.firestore.FieldValue.increment(1);
         db.collection('panelchat').doc('admin_closedchats').update({closed:increment});
 
+    }
+
 
             
-    render() {
+    render(){
         return (
             <div>
 
