@@ -15,6 +15,7 @@ function Navbar(props) {
   const showSidebar = () => setSidebar(!sidebar);
   const openCart = () =>{
     //Se abre el carrito
+    console.log(auth.currentUser)
   }
 
   const logout = () => {
@@ -24,6 +25,13 @@ function Navbar(props) {
       window.location.reload();
     })
   }
+
+  const [name, setName] = useState("User");
+  auth.onAuthStateChanged((user)=>{
+    if(user){
+      setName(auth.currentUser.displayName.split(" ")[0])
+    }
+  })
 
   return (
     <>
@@ -47,6 +55,16 @@ function Navbar(props) {
               <Link to='#' className='menu-bars'>
                 <AiIcons.AiOutlineClose />
               </Link>
+            </li>
+            <li>
+              <div id="userDisplayName">
+                <h4 id="displayname">
+                  <strong>
+                    <FaIcons.FaUserCircle /> 
+                    ‎‎‎‏‏‎ ‎‏‏‎ ‎‏‏‎{name}
+                  </strong>
+                </h4>
+              </div>
             </li>
             {SidebarData.map((item, index) => {
               return (

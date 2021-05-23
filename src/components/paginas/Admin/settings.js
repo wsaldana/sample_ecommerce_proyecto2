@@ -13,27 +13,19 @@ export default class  Settings extends React.Component {
     };
   }
 
-  handleSubmit =e =>{
+  handleSubmit = e => {
      e.preventDefault();
-
-  };
-
-  // reauth = (currentPassword)  =>{
-  //   var user = firebase.auth().currentUser;
-  //   var cred = firebase.auth.signInWithEmailAndPassword.credential(user.email,currentPassword);
-  //   return user.reauthenticateWithCredential(cred);
-  // }
-
-  
+  }
 
   onChangePassword = () =>{
-   // this.reauth(this.state.currentPassword).then(() =>{
-      var user  = firebase.auth().currentUser;
-    user.updatePassword(document.getElementById("inputPassword").value).then(()=>{
-      alert("Password was changed");
-      console.log('password was changed')
-    }).catch((error)=> { console.log(error.message);});
-    //}).catch((error) => { console.log(error.message)});
+    auth.currentUser.updatePassword(
+        document.getElementById("inputPassword").value
+    ).then(()=>{
+        alert("Password was changed");
+    }).catch((error)=> { 
+        alert("Something went wrong...");
+        console.log(error.message);
+    });
   }
 
   rename = ()=>{
@@ -48,24 +40,21 @@ export default class  Settings extends React.Component {
 
   render(){ 
     return (
-    <div className="form">
-      <div className ="auth-inner">
+      <div className="form">
+        <div className ="auth-inner">
 
-          <h3>CHANGE DISPLAY NAME</h3>
-          <label className="label">New Name</label>
-          <input className = "pass form-control" id="inputName" placeholder = "Enter Name" />
-          <button className="btn btn-lg btn-primary btn-block" onClick={()=>this.rename()} >Change Name</button>
+            <h3>CHANGE DISPLAY NAME</h3>
+            <label className="label">New Name</label>
+            <input className = "pass form-control" id="inputName" placeholder = "Enter Name" />
+            <button className="btn btn-lg btn-primary btn-block" onClick={()=>this.rename()} >Change Name</button>
 
-          <h3>RESET PASSWORD</h3>
-          <label className="label">New Password</label>
-          <input className = "pass form-control" id="inputPassword" type = "password" placeholder =  "Enter Password" />
-          <button className="btn btn-lg btn-primary btn-block" onClick={()=>this.onChangePassword()} >Change Password</button>
+            <h3>RESET PASSWORD</h3>
+            <label className="label">New Password</label>
+            <input className = "pass form-control" id="inputPassword" type = "password" placeholder =  "Enter Password" />
+            <button className="btn btn-lg btn-primary btn-block" onClick={()=>this.onChangePassword()} >Change Password</button>
 
+        </div>
       </div>
-    </div>
-    
     );
-
-
-    }
+  }
 }
