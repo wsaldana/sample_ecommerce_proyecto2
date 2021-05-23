@@ -7,6 +7,7 @@ import AppUser from './AppUser';
 import Login from './components/Usuarios/Login/Login';
 import Ecommerce from './components/Ecommerce/Shop/Shop';
 import Cart from './components/Ecommerce/Cart/Cart';
+import Panel from './components/Panel/Panel';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.render(
           <Route path="/admin" component={AppAdmin} />
           <Route path='/shop' component={Ecommerce} />
           <Route path='/cart' component={Cart} />
+          <Route path='/panel' component={Panel}/>
         </Switch>
     </BrowserRouter>
   </React.StrictMode>,

@@ -1,186 +1,151 @@
-import React, { useEffect, useState } from "react";
-import { Container, Row, Col } from 'react-bootstrap';
+import React, { Component, useEffect, useState } from "react";
+import { Container, Row, Col, Dropdown } from 'react-bootstrap';
 import './grid.css';
 import Usuarios from './Usuario'
 import { db, firebase, auth } from "./../../config/firebase.config";
 import './Panel.css';
+import Chat from '../Chat/Chat/Chat';
+import { render } from "@testing-library/react";
 
-class Panel extends React.Component {
-    state = {
-        users: null
-    }
-    componentDidMount() {
-        console.log("Perroooooooooooos")
-        db.collection('chats').get()
-            .then(snapshot => {
-                console.log(snapshot)
-                const usuarios = []
-                snapshot.forEach(doc => {
-                    const data = doc.data()
-                    data.id = doc.id
-                    usuarios.push(data)
-                    console.log(data)
-                })
-                this.setState({ users: usuarios })
-                console.log(usuarios)
+function Panel() {
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const [users, setUser] = useState([]);
+    function getUser() {
+        db.collection('chats').onSnapshot((querySnapshot) => {
+            const items = []
+            querySnapshot.forEach((doc) => {
+                const Data = doc.data();
+                Data.id = doc.id
+                items.push(Data)
             })
+            setUser(items)
+        })
     }
-    render() {
-        return (
-            <div>
+    useEffect(() => {
+        getUser();
+    }, [])
 
-                {
-                    this.state.users &&
-                    this.state.users.map(data => {
-                        if (data.status == "in progress") {
-                            console.log("FUNCIONA")
+    function countChat() {
+        console.log("Entra correctamente")
+        const db = firebase.firestore();
+        console.log(auth.currentUser.displayName)
+        const increment = firebase.firestore.FieldValue.increment(1);
+        db.collection('panelchat').doc('esp19258@uvg.edu.gt').update({ closed: increment });
+
+    }
+    function failChat() {
+        console.log("Entra correctamente")
+        const db = firebase.firestore();
+        console.log(auth.currentUser.displayName)
+        const increment = firebase.firestore.FieldValue.increment(1);
+        db.collection('panelchat').doc('esp19258@uvg.edu.gt').update({ fail: increment });
+
+    }
+/*
+    setInterval(() => {
+        db.collection('chat').doc('3U1KybtBjT3DSRcx6xjl').update({ stats: 'fail' });
+      }, 10 * 1000);
+*/
+    return (
+        <div>
+
+
+            <input type="text" className="buscador" placeholder="Buscar por estado" onChange={event => { setSearchTerm(event.target.value) }} />
+            {
+                users &&
+                users
+                    .filter(data => {
+
+                        if (searchTerm == "") {
+
+                            return data
+                        } else if (data.status.toLowerCase().includes(searchTerm.toLowerCase())) {
+                            return data
+
+                        }
+
+
+                    })
+                    .map(data => {
+                        if (data.status === "in progress") {
                             return (
                                 <Container fluid className="grid">
                                     <Row justify="between">
                                         <Col className="Usuarios">
 
                                             <h1>{data.clientEmail}</h1>
-
-
-
-
-
                                         </Col>
                                         <Col className="botones">
-
-                                            <button className="btnIniciar">
+                                            <button className="btnIniciar" >
                                                 {data.status}
                                             </button>
-                                            <button className="btnHistory">
-                                                HISTORY
+                                            <button className="btnHistory" onClick={()=>{
+                                                render(
+                                                    <Chat chatId={data.id}/>
+                                                )
+                                                
+                                            }}>
+                                                START
                                             </button>
-
-
-
                                         </Col>
-
                                     </Row>
-
-
-
                                 </Container>
                             )
+                        } if (data.status === "fail") {
 
-                        } if (data.status == "fail") {
-                            console.log("DEBERIA DE SEGUIR FUNCIONANDO")
                             return (
                                 <Container fluid className="grid">
                                     <Row justify="between">
                                         <Col className="Usuarios">
-
                                             <h1>{data.clientEmail}</h1>
-
                                         </Col>
                                         <Col className="botones">
-
                                             <button className="btnFail">
                                                 {data.status}
                                             </button>
-                                            <button className="btnHistory">
+                                            <button className="btnHistory" onClick={()=>{
+                                                render(
+                                                    <Chat chatId={data.id}/>
+                                                )
+                                                
+                                            }}>
                                                 HISTORY
                                             </button>
-
                                         </Col>
-
                                     </Row>
-
                                 </Container>
-
                             )
+                        } if (data.status === "completed") {
 
-                        } if (data.status == "completed") {
-                            console.log("CONTINUA FUNCIONANDO")
                             return (
                                 <Container fluid className="grid">
                                     <Row justify="between">
                                         <Col className="Usuarios">
-
                                             <h1>{data.clientEmail}</h1>
-
                                         </Col>
                                         <Col className="botones">
-
-                                            <button className="btnCompleted">
+                                            <button onClick={failChat} className="btnCompleted">
                                                 {data.status}
                                             </button>
-                                            <button className="btnHistory">
+                                            <button className="btnHistory" onClick={()=>{
+                                                render(
+                                                    <Chat chatId={data.id}/>
+                                                )
+                                                
+                                            }}>
                                                 HISTORY
                                             </button>
-
                                         </Col>
-
                                     </Row>
-
                                 </Container>
                             )
                         }
-
                     })
-                }
-            </div>
-        )
-    }
-
-}
-
-
-
-/*
-function Prueba() {
-    const [elements, setElements] = useState([]);
-    //var elements = []
-    var oldElements = []
-    const getUsers = async () => {
-        //setElements([])
-        db.collection('chats').get().then((snapshot) => {
-            snapshot.docs.forEach(doc => {
-                const InfoUser = doc.data()
-                InfoUser.id = doc.id
-               
-                setElements(elements.concat(InfoUser))
-                    
-            })
-            //setElements(elements)
-        })
-
-    }
-
-    useEffect(() => {
-        //getChat();
-        //setInterval(getUsers, 5000);
-        getUsers()
-        console.log(elements)
-        console.log(oldElements)
-        
-    });
-    
-    
-    return (
-        <div className="divCentral">
-            
-            <ul>
-
-                {
-                    elements.map((doc) => {
-                        return <Usuarios
-                            key ={doc.id}
-                            clientEmail={doc.clientEmail}
-                            status={doc.status}
-                            id={doc.id}
-                        ></Usuarios>
-                    })}
-            </ul>
+            }
+           
         </div >
-
     )
-
 }
 
-export default Prueba;
-*/
 export default Panel;
