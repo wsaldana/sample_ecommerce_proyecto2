@@ -54,7 +54,7 @@ export default class settingsUser extends Component {
                         onChange={e => this.onTodoChangeName(e.target.value)}
                     />
 
-                    <label className="label">Phone Number</label>
+                    <label className="label">Photo URL</label>
                     <input 
                         className="pass form-control" 
                         id="inputPhoto" 
