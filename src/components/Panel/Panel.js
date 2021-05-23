@@ -41,11 +41,6 @@ function Panel() {
 
 
             <input type="text" className="buscador" placeholder="Buscar por estado" onChange={event => { setSearchTerm(event.target.value) }} />
-
-
-
-
-
             {
                 users &&
                 users
