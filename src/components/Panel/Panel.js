@@ -6,49 +6,54 @@ import { db, firebase, auth } from "./../../config/firebase.config";
 import './Panel.css';
 import Chat from '../Chat/Chat/Chat.jsx';
 
-class Panel extends React.Component {
-    state = {
-        users: null
-    }
-    componentDidMount() {
-        
-        db.collection('chats').get()
-            .then(snapshot => {
-            
-                const usuarios = []
-                snapshot.forEach(doc => {
-                    const data = doc.data()
-                    data.id = doc.id
-                    usuarios.push(data)
-                    
-                })
-                this.setState({ users: usuarios })
-                
+function Panel() {
+
+    const [users, setUser] = useState([]);
+    function getUser() {
+        db.collection('chats').onSnapshot((querySnapshot) => {
+            const items = []
+            querySnapshot.forEach((doc) => {
+                const Data = doc.data();
+                Data.id = doc.id
+                items.push(Data)
             })
+            setUser(items)
+        })
     }
-    countChat() {
+    useEffect(() =>{
+        getUser();
+    },[])
+
+    function countChat() {
         console.log("Entra correctamente")
         const db = firebase.firestore();
         console.log(auth.currentUser.displayName)
         const increment = firebase.firestore.FieldValue.increment(1);
-        db.collection('panelchat').doc('esp19258@uvg.edu.gt').update({closed:increment});
+        db.collection('panelchat').doc('esp19258@uvg.edu.gt').update({ closed: increment });
 
     }
 
 
-            
-    render(){
-        return (
-            <div>
 
-                {
-                    this.state.users &&
-                    this.state.users
-                        .filter(data=>{
-                            return data.status === "in progress"
-                        })
-                        .map(data => {
-                          if (data.status === "in progress") {
+
+    return (
+        <div>
+
+            {
+                users &&
+                users
+                    .filter(data => {
+                        const estado = ""
+                        if(estado.length>0){
+                            return data.status === "completed"
+                        }
+                        else{
+                            return data
+                        }
+                        
+                    })
+                    .map(data => {
+                        if (data.status === "in progress") {
                             return (
                                 <Container fluid className="grid">
                                     <Row justify="between">
@@ -57,8 +62,8 @@ class Panel extends React.Component {
                                             <h1>{data.clientEmail}</h1>
                                         </Col>
                                         <Col className="botones">
-                                            <button className="btnIniciar"> 
-                                            {/* onClick={handleClick(data.id)}> */}
+                                            <button className="btnIniciar">
+                                                {/* onClick={handleClick(data.id)}> */}
                                                 {data.status}
                                                 {/* <Chat chatId={D3dwXmbrFtYXIeHlgu89} /> */}
                                             </button>
@@ -70,7 +75,7 @@ class Panel extends React.Component {
                                 </Container>
                             )
                         } if (data.status === "fail") {
-                            
+
                             return (
                                 <Container fluid className="grid">
                                     <Row justify="between">
@@ -89,7 +94,7 @@ class Panel extends React.Component {
                                 </Container>
                             )
                         } if (data.status === "completed") {
-                            
+
                             return (
                                 <Container fluid className="grid">
                                     <Row justify="between">
@@ -97,7 +102,7 @@ class Panel extends React.Component {
                                             <h1>{data.clientEmail}</h1>
                                         </Col>
                                         <Col className="botones">
-                                        <button onClick={this.countChat} className="btnCompleted">
+                                            <button onClick={countChat} className="btnCompleted">
                                                 {data.status}
                                             </button>
                                             <button className="btnHistory">
@@ -116,10 +121,10 @@ class Panel extends React.Component {
                         } */
 
                     })
-                }
-            </div>
-        )
-    }
+            }
+        </div>
+    )
+
 
 }
 
