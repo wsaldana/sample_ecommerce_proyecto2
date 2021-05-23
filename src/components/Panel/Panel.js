@@ -102,7 +102,12 @@ function Panel() {
                                             <button className="btnFail">
                                                 {data.status}
                                             </button>
-                                            <button className="btnHistory">
+                                            <button className="btnHistory" onClick={()=>{
+                                                render(
+                                                    <Chat chatId={data.id}/>
+                                                )
+                                                
+                                            }}>
                                                 HISTORY
                                             </button>
                                         </Col>
@@ -121,7 +126,12 @@ function Panel() {
                                             <button onClick={failChat} className="btnCompleted">
                                                 {data.status}
                                             </button>
-                                            <button className="btnHistory">
+                                            <button className="btnHistory" onClick={()=>{
+                                                render(
+                                                    <Chat chatId={data.id}/>
+                                                )
+                                                
+                                            }}>
                                                 HISTORY
                                             </button>
                                         </Col>
