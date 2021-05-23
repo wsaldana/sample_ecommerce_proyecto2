@@ -19,7 +19,7 @@ function App() {
           <div>
             <Navbar />
             <Route path='/settings' component={Settings} />
-            <Route path='/home' component={Ecommerce} />
+            <Route path='/user' component={Ecommerce} />
           </div>
         </Switch>
       </Router>
