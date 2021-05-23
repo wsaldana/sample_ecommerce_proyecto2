@@ -54,7 +54,7 @@ function Panel() {
                 users &&
                 users
                     .filter(data => {
-                    
+
                         if (searchTerm == "") {
 
                             return data
@@ -75,13 +75,15 @@ function Panel() {
                                             <h1>{data.clientEmail}</h1>
                                         </Col>
                                         <Col className="botones">
-                                            <button className="btnIniciar" onClick={handleClick}>
-                                                {/* onClick={handleClick(data.id)}> */}
+                                            <button className="btnIniciar" >
                                                 {data.status}
-                                                {/* <Chat chatId={12346456} /> */}
-                                                {/* <Chat chatId={12346456} /> D3dwXmbrFtYXIeHlgu89 */}
                                             </button>
-                                            <button className="btnHistory">
+                                            <button className="btnHistory" onClick={()=>{
+                                                render(
+                                                    <Chat chatId={data.id}/>
+                                                )
+                                                
+                                            }}>
                                                 START
                                             </button>
                                         </Col>
@@ -127,20 +129,11 @@ function Panel() {
                                 </Container>
                             )
                         }
-
-                        function handleClick(){
-                            render (
-                                <Chat chatId={12346456} />
-                            );
-                        }
-
                     })
             }
-            { }
+           
         </div >
     )
-
-
 }
 
 export default Panel;
