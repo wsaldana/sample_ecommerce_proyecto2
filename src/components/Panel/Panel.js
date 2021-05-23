@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Container, Row, Col } from 'react-bootstrap';
+import React, { Component, useEffect, useState } from "react";
+import { Container, Row, Col, Dropdown } from 'react-bootstrap';
 import './grid.css';
 import Usuarios from './Usuario'
 import { db, firebase, auth } from "./../../config/firebase.config";
 import './Panel.css';
-import Chat from '../Chat/Chat/Chat.jsx';
 
 function Panel() {
+    const [searchTerm, setSearchTerm] = useState("");
 
     const [users, setUser] = useState([]);
     function getUser() {
@@ -20,9 +20,9 @@ function Panel() {
             setUser(items)
         })
     }
-    useEffect(() =>{
+    useEffect(() => {
         getUser();
-    },[])
+    }, [])
 
     function countChat() {
         console.log("Entra correctamente")
@@ -39,18 +39,33 @@ function Panel() {
     return (
         <div>
 
+
+            <input type="text" className="buscador" placeholder="Buscar por estado" onChange={event => { setSearchTerm(event.target.value) }} />
+
+
+
+
+
             {
                 users &&
                 users
                     .filter(data => {
                         const estado = ""
-                        if(estado.length>0){
+
+
+
+                        if (estado.length > 0) {
                             return data.status === "completed"
                         }
-                        else{
+                        else if (searchTerm == "") {
+
                             return data
+                        } else if (data.status.toLowerCase().includes(searchTerm.toLowerCase())) {
+                            return data
+
                         }
-                        
+
+
                     })
                     .map(data => {
                         if (data.status === "in progress") {
@@ -116,13 +131,14 @@ function Panel() {
 
                         /* function handleClick(chat_id){
                             return (
-                                <Chat chatId={chat_id} />
-                              );
+            <Chat chatId={chat_id} />
+            );
                         } */
 
                     })
             }
-        </div>
+            { }
+        </div >
     )
 
 
