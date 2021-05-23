@@ -15,7 +15,7 @@ function App() {
       <Router>
         <Switch>
           {/*<Route path='/logout' render={(props) => <Login {...props} logout={true} />}/>*/}
-          
+          <Route exact path='/' component={Login} />
           <div>
             <Navbar />
             <Route path='/settings' component={Settings} />
