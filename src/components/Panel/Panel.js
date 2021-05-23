@@ -34,7 +34,14 @@ function Panel() {
         db.collection('panelchat').doc('esp19258@uvg.edu.gt').update({ closed: increment });
 
     }
+    function failChat() {
+        console.log("Entra correctamente")
+        const db = firebase.firestore();
+        console.log(auth.currentUser.displayName)
+        const increment = firebase.firestore.FieldValue.increment(1);
+        db.collection('panelchat').doc('esp19258@uvg.edu.gt').update({ fail: increment });
 
+    }
 
 
 
@@ -75,7 +82,7 @@ function Panel() {
                                                 {/* <Chat chatId={12346456} /> D3dwXmbrFtYXIeHlgu89 */}
                                             </button>
                                             <button className="btnHistory">
-                                                HISTORY
+                                                START
                                             </button>
                                         </Col>
                                     </Row>
@@ -109,7 +116,7 @@ function Panel() {
                                             <h1>{data.clientEmail}</h1>
                                         </Col>
                                         <Col className="botones">
-                                            <button onClick={countChat} className="btnCompleted">
+                                            <button onClick={failChat} className="btnCompleted">
                                                 {data.status}
                                             </button>
                                             <button className="btnHistory">
