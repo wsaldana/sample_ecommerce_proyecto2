@@ -50,14 +50,8 @@ function Panel() {
                 users &&
                 users
                     .filter(data => {
-                        const estado = ""
-
-
-
-                        if (estado.length > 0) {
-                            return data.status === "completed"
-                        }
-                        else if (searchTerm == "") {
+                    
+                        if (searchTerm == "") {
 
                             return data
                         } else if (data.status.toLowerCase().includes(searchTerm.toLowerCase())) {
