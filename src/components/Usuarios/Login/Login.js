@@ -61,6 +61,7 @@ class Login extends React.Component {
       auth
       .signInWithEmailAndPassword(username, password)
       .then(userCredential => {
+        console.log(auth.currentUser)
         console.log('sign up')
         this.props.history.push('/admin');
       })
@@ -75,6 +76,7 @@ class Login extends React.Component {
                     <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
                     <label htmlFor="inputEmail" className="sr-only">Email address</label>
                     <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required autoFocus />
+                    <br />
                     <label htmlFor="inputPassword" className="sr-only">Password</label>
                     <input type="password" id="inputPassword" className="form-control" placeholder="Password" required />
                     <button 
@@ -88,15 +90,7 @@ class Login extends React.Component {
                       className="btn btn-lg btn-primary btn-block btn-admin" 
                       type="submit" 
                       onClick = {() => {
-                        auth.onAuthStateChanged((user) => {
-                          if(user){
-                            console.log("logeado");
-                            //DIRIGIR A LA PAGINA DE USUARIOS
-                            this.props.history.push('/user');
-                          }else{
-                            this.logear()
-                          }
-                        });
+                        this.logear()
                       }
                     }>
                       <div className="google-icon-wrapper">

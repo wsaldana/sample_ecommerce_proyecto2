@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 import { SidebarData } from '../Usuarios/sidebar';
 import './navbar.css';
 import { IconContext } from 'react-icons';
+import { auth } from '../../config/firebase.config';
 
-function Navbar() {
+function Navbar(props) {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
@@ -25,6 +26,16 @@ function Navbar() {
               <Link to='#' className='menu-bars'>
                 <AiIcons.AiOutlineClose />
               </Link>
+            </li>
+            <li>
+              <div id="userDisplayName">
+                <h4 id="displayname">
+                  <strong>
+                    <FaIcons.FaUserCircle />
+                    ‎‎‎‏‏‎ ‎‏‏‎ ‎‏‏‎{auth.currentUser.displayName ? auth.currentUser.displayName : auth.currentUser.email}
+                  </strong>
+                </h4>
+              </div>
             </li>
             {SidebarData.map((item, index) => {
               return (

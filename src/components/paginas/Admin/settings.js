@@ -27,7 +27,6 @@ export default class  Settings extends React.Component {
   
 
   onChangePassword = () =>{
-
    // this.reauth(this.state.currentPassword).then(() =>{
       var user  = firebase.auth().currentUser;
     user.updatePassword(document.getElementById("inputPassword").value).then(()=>{
@@ -35,28 +34,34 @@ export default class  Settings extends React.Component {
       console.log('password was changed')
     }).catch((error)=> { console.log(error.message);});
     //}).catch((error) => { console.log(error.message)});
+  }
 
-
-    
+  rename = ()=>{
+    auth.currentUser.updateProfile({
+      displayName: document.getElementById("inputName").value
+    }).then(()=>{
+      alert("Display name was changed");
+    }).catch(()=>{
+      alert("Something went wrong...");
+    });
   }
 
   render(){ 
     return (
-      
-        <div className="form">
+    <div className="form">
+      <div className ="auth-inner">
 
-        <div className ="auth-inner">    
-        <h3>RESET PASSWORD</h3>
+          <h3>CHANGE DISPLAY NAME</h3>
+          <label className="label">New Name</label>
+          <input className = "pass form-control" id="inputName" placeholder = "Enter Name" />
+          <button className="btn btn-lg btn-primary btn-block" onClick={()=>this.rename()} >Change Name</button>
 
-              <label className="label">New Password</label>
-              <div className = "txt">
-              <input className = "pass" id="inputPassword" type = "password" placeholder =  "Enter Password" />
-            </div>
+          <h3>RESET PASSWORD</h3>
+          <label className="label">New Password</label>
+          <input className = "pass form-control" id="inputPassword" type = "password" placeholder =  "Enter Password" />
+          <button className="btn btn-lg btn-primary btn-block" onClick={()=>this.onChangePassword()} >Change Password</button>
 
-        <div className = "btn">
-      <button onClick={()=>this.onChangePassword()} >Change Password</button>
       </div>
-    </div>
     </div>
     
     );
