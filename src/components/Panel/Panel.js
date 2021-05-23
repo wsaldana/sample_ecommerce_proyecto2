@@ -4,6 +4,8 @@ import './grid.css';
 import Usuarios from './Usuario'
 import { db, firebase, auth } from "./../../config/firebase.config";
 import './Panel.css';
+import Chat from '../Chat/Chat/Chat';
+import { render } from "@testing-library/react";
 
 function Panel() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -66,10 +68,11 @@ function Panel() {
                                             <h1>{data.clientEmail}</h1>
                                         </Col>
                                         <Col className="botones">
-                                            <button className="btnIniciar">
+                                            <button className="btnIniciar" onClick={handleClick}>
                                                 {/* onClick={handleClick(data.id)}> */}
                                                 {data.status}
-                                                {/* <Chat chatId={D3dwXmbrFtYXIeHlgu89} /> */}
+                                                {/* <Chat chatId={12346456} /> */}
+                                                {/* <Chat chatId={12346456} /> D3dwXmbrFtYXIeHlgu89 */}
                                             </button>
                                             <button className="btnHistory">
                                                 HISTORY
@@ -118,11 +121,11 @@ function Panel() {
                             )
                         }
 
-                        /* function handleClick(chat_id){
-                            return (
-            <Chat chatId={chat_id} />
-            );
-                        } */
+                        function handleClick(){
+                            render (
+                                <Chat chatId={12346456} />
+                            );
+                        }
 
                     })
             }
