@@ -6,12 +6,25 @@ import "./Chat.css";
 
 import { db, firebase, auth } from "../../../config/firebase.config";
 import ChatHeader from "../ChatHeader/ChatHeader";
+//IMPORTANTE
+//Estados
 
+//Finished: significa que el usuario abandono o se le acabo el tiempo
+//completed: que el administrador dio por concluido el chat
+//in progress: El chat ha iniciado o esta en progreso
+
+let counterTimer = 0;
+let terminado = false;
 const Chat = (props) => {
 
   const [mensajes, setMensajes] = useState([]);
-  const [chatState, setChatState] = useState("Finished");
-  const [chatName, setChatName] = useState("El Pepe");
+  const [inputState, setInputState] = useState(false);
+  const [chatState, setChatState] = useState("in progress");
+  const [chatName, setChatName] = useState("Cargando...");
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isChatFinished, setIsChatFinished] = useState(true);
+  const [isChatCompleted, setIsChatCompleted] = useState(true);
+
 
   const getChatInfo = async () => {
     db.collection('chats').doc(props.chatId)
@@ -19,12 +32,15 @@ const Chat = (props) => {
         const { status, clientEmail, adminEmail } = snapshot.data();
         setChatState(status);
 
-        if (adminEmail === auth.currentUser.email) {
+        if (adminEmail !== auth.currentUser.email) {
+          
           setChatName(clientEmail.split('@')[0]);
         } else {
           setChatName(adminEmail.split('@')[0]);
+          setIsAdmin(true)
+          //aquí trigger si es admin
         }
-      })
+      });
   }
 
 
@@ -33,30 +49,99 @@ const Chat = (props) => {
       .collection('mensajes').orderBy('time')
       .onSnapshot((snapshot) => {
         const mensajes = []
+        
         snapshot.forEach(document => {
           const documentData = document.data();
           documentData.id = document.id;
           mensajes.push(documentData);
         });
         setMensajes(mensajes);
+        setTimerr();
       }, (error) => {
         console.log(error)
-      })
+        alert("Ha habido un error con la conexión")
+        
+      });
   }
 
   const sendMessages = async (text) => {
+   
     await db.collection('chats').doc(props.chatId)
       .collection('mensajes').doc().set({
         content: text,
         sender: auth.currentUser.uid,
         time: firebase.firestore.FieldValue.serverTimestamp(),
-      })
+      }).catch(error => {
+        alert("Ha habido un error con la conexión")
+        throw new Error('Error: Getting document:');
+    })
+      setTimerr();
   }
+
+  const setFinalizado = async (state) => {
+    if ((counterTimer === state) && (!terminado)){
+      console.log(terminado)
+      alert('Se ha Finalizado el chat por tiempo');
+      setChatState("Finished");
+      await db.collection('chats').doc(props.chatId).update({
+        status:"Finished",
+      })
+      .catch(error => {
+        alert("Ha habido un error con la conexión")
+        throw new Error('Error: Updating document:');
+    })
+    }
+  };
+
+  const setTimerr = () => {
+    const t = counterTimer + 1;
+    setTimeout(()=>setFinalizado(t), 300000);
+    counterTimer = t;
+  }
+
+
+  const completeChat = async () => {
+    await db.collection('chats').doc(props.chatId).update({
+      status:"completed",
+    })
+    .catch(error => {
+      alert("Ha habido un error con la conexión")
+      throw new Error('Error: Updating document:');
+  })};
+
+
+  const abandonChat = async () => {
+    await db.collection('chats').doc(props.chatId).update({
+      status:"Finished",
+    })
+    .catch(error => {
+      alert("Ha habido un error con la conexión")
+      throw new Error('Error: Updating document:');
+  })};
+
+
+
 
   useEffect(() => {
     getMessages();
     getChatInfo();
-  });
+    setTimerr();
+    //setInputState(chatState === "Finished");
+    
+
+  }, []);
+
+
+
+  useEffect(() => {
+    
+    setInputState((chatState === "Finished")||(chatState === "completed")||(chatState === "fail"));
+    terminado = ((chatState === "Finished")||(chatState === "completed")||(chatState === "fail"));
+    setIsChatFinished(chatState === "Finished");
+    setIsChatCompleted(chatState === "completed");
+    
+    
+  }, [chatState]);
 
 
   return (
@@ -73,7 +158,9 @@ const Chat = (props) => {
           })
         }
       </div>
-      <ChatInput send={sendMessages}/>
+      <ChatInput send={sendMessages} estado={inputState}/>
+      { (isChatFinished && isAdmin)? <button type="button" onClick={completeChat} >Finaliza el chat</button>: null }
+      { (!isAdmin && !(isChatCompleted || isChatFinished))? <button type="button" onClick={abandonChat}>Abandonar el chat</button>: null }
     </div>
   );
 }
