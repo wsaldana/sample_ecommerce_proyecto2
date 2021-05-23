@@ -26,7 +26,15 @@ class Panel extends React.Component {
                 console.log(usuarios)
             })
     }
+    countChat() {
+        console.log("Entra correctamente")
+        const db = firebase.firestore();
 
+        const increment = firebase.firestore.FieldValue.increment(1);
+        db.collection('panelchat').doc('admin_closedchats').update({closed:increment});
+
+
+            
     render() {
         return (
             <div>
@@ -84,7 +92,7 @@ class Panel extends React.Component {
                                             <h1>{data.clientEmail}</h1>
                                         </Col>
                                         <Col className="botones">
-                                            <button className="btnCompleted">
+                                        <button onClick={this.countChat} className="btnCompleted">
                                                 {data.status}
                                             </button>
                                             <button className="btnHistory">
