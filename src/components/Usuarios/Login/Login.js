@@ -1,6 +1,7 @@
 import React from "react";
 import './style.css';
 import { auth, firebase } from "../../../config/firebase.config";
+import {loginAdmin} from "../someFunctions";
 
 class Login extends React.Component {
     constructor(props) {
@@ -56,18 +57,6 @@ class Login extends React.Component {
        } 
     }*/
 
-    loginAdmin = (username,password) =>{
-      console.log(username, password)
-      auth
-      .signInWithEmailAndPassword(username, password)
-      .then(userCredential => {
-        console.log(auth.currentUser)
-        console.log('sign up')
-        this.props.history.push('/admin');
-      })
-
-    }
-
     render() {
       return (
         <div className="login-body">
@@ -83,8 +72,20 @@ class Login extends React.Component {
                         className="btn btn-lg btn-primary btn-block btn-user" 
                         type="submit" 
                         // eslint-disable-next-line no-undef
-                        onClick = { () => 
-                          this.loginAdmin(document.getElementById("inputEmail").value, document.getElementById("inputPassword").value) } //() => this.Registro(document.getElementById("inputEmail").value, document.getElementById("inputPassword").value)
+                        onClick = { () => {
+                          const email = document.getElementById("inputEmail").value
+                          const contra = document.getElementById("inputPassword").value
+                          loginAdmin(email, contra) 
+                          auth.onAuthStateChanged((user) => {
+                            if(user){
+                              console.log("logeado");
+                              //DIRIGIR A LA PAGINA DE USUARIOS
+                              this.props.history.push('/admin');
+                            }else{
+                              console.log("no esta logeado");
+                            }
+                          });}} 
+                          //() => this.Registro(document.getElementById("inputEmail").value, document.getElementById("inputPassword").value)
                     >Sign in as Admin</button>
                     <button 
                       className="btn btn-lg btn-primary btn-block btn-admin" 

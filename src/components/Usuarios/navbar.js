@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import { SidebarData } from '../Usuarios/sidebar';
 import './navbar.css';
 import { IconContext } from 'react-icons';
-import { auth } from '../../config/firebase.config';
+import { auth } from "../../config/firebase.config"
+import { loginAdmin } from './someFunctions';
 
 function Navbar(props) {
   const [sidebar, setSidebar] = useState(false);
@@ -38,14 +39,26 @@ function Navbar(props) {
               </div>
             </li>
             {SidebarData.map((item, index) => {
-              return (
-                <li key={index} className={item.cName}>
-                  <Link to={item.path}>
-                    {item.icon}
-                    <span>{item.title}</span>
-                  </Link>
-                </li>
-              );
+              if(item.onclickF){
+                return (
+                  // eslint-disable-next-line no-unused-expressions
+                  <li key={index} className={item.cName} onClick={item.onclickF}>
+                    <Link to={item.path}>
+                      {item.icon}
+                      <span>{item.title}</span>
+                    </Link>
+                  </li>
+                );
+              }else{
+                return (
+                  <li key={index} className={item.cName}>
+                    <Link to={item.path}>
+                      {item.icon}
+                      <span>{item.title}</span>
+                    </Link>
+                  </li>
+                );
+              }
             })}
           </ul>
         </nav>
