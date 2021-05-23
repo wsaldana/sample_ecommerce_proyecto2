@@ -43,9 +43,12 @@ class Panel extends React.Component {
 
                 {
                     this.state.users &&
-                    this.state.users.map(data => {
-                        if (data.status == "in progress") {
-                            
+                    this.state.users
+                        .filter(data=>{
+                            return data.status === "in progress"
+                        })
+                        .map(data => {
+                          if (data.status === "in progress") {
                             return (
                                 <Container fluid className="grid">
                                     <Row justify="between">
@@ -66,7 +69,7 @@ class Panel extends React.Component {
                                     </Row>
                                 </Container>
                             )
-                        } if (data.status == "fail") {
+                        } if (data.status === "fail") {
                             
                             return (
                                 <Container fluid className="grid">
@@ -85,7 +88,7 @@ class Panel extends React.Component {
                                     </Row>
                                 </Container>
                             )
-                        } if (data.status == "completed") {
+                        } if (data.status === "completed") {
                             
                             return (
                                 <Container fluid className="grid">
