@@ -38,6 +38,7 @@ export default class ChatInput extends React.Component {
     return (
       <div className="chat-input-bar">
         <input
+          disabled = {this.props.estado}
           onChange={this.handleChange}
           className="chat-input-message"
           placeholder="Type something..."
