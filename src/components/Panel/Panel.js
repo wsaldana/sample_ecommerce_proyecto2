@@ -11,27 +11,27 @@ class Panel extends React.Component {
         users: null
     }
     componentDidMount() {
-        console.log("Perroooooooooooos")
+        
         db.collection('chats').get()
             .then(snapshot => {
-                console.log(snapshot)
+            
                 const usuarios = []
                 snapshot.forEach(doc => {
                     const data = doc.data()
                     data.id = doc.id
                     usuarios.push(data)
-                    console.log(data)
+                    
                 })
                 this.setState({ users: usuarios })
-                console.log(usuarios)
+                
             })
     }
     countChat() {
         console.log("Entra correctamente")
         const db = firebase.firestore();
-
+        console.log(auth.currentUser.displayName)
         const increment = firebase.firestore.FieldValue.increment(1);
-        db.collection('panelchat').doc('admin_closedchats').update({closed:increment});
+        db.collection('panelchat').doc('esp19258@uvg.edu.gt').update({closed:increment});
 
     }
 
@@ -45,7 +45,7 @@ class Panel extends React.Component {
                     this.state.users &&
                     this.state.users.map(data => {
                         if (data.status == "in progress") {
-                            console.log("FUNCIONA")
+                            
                             return (
                                 <Container fluid className="grid">
                                     <Row justify="between">
@@ -67,7 +67,7 @@ class Panel extends React.Component {
                                 </Container>
                             )
                         } if (data.status == "fail") {
-                            console.log("DEBERIA DE SEGUIR FUNCIONANDO")
+                            
                             return (
                                 <Container fluid className="grid">
                                     <Row justify="between">
@@ -86,7 +86,7 @@ class Panel extends React.Component {
                                 </Container>
                             )
                         } if (data.status == "completed") {
-                            console.log("CONTINUA FUNCIONANDO")
+                            
                             return (
                                 <Container fluid className="grid">
                                     <Row justify="between">
