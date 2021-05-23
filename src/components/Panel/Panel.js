@@ -42,9 +42,11 @@ function Panel() {
         db.collection('panelchat').doc('esp19258@uvg.edu.gt').update({ fail: increment });
 
     }
-
-
-
+/*
+    setInterval(() => {
+        db.collection('chat').doc('3U1KybtBjT3DSRcx6xjl').update({ stats: 'fail' });
+      }, 10 * 1000);
+*/
     return (
         <div>
 
