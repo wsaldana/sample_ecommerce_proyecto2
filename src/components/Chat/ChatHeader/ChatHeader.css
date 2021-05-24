@@ -1,8 +1,9 @@
 .chat-banner {
     flex: 0 1 auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     box-shadow: 0 0 10px #cecece;
     padding: 15px;
 }
+
