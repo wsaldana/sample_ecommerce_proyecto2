@@ -1,0 +1,15 @@
+.margin-zero{
+    margin:0%;
+}
+.receiptCont{
+    align-self: center;
+    text-align: center;
+    margin-left: 4vw;
+    margin-right: 2vw;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    border-radius: 5px;
+    height: max-content;
+    box-shadow: 3px 3px 3px 3px #545454;
+    transition: all 1s ease;
+}
