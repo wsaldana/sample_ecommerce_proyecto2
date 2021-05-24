@@ -79,6 +79,16 @@
   border-radius: 12px;
   text-transform: uppercase;
 }
+.btnFinished{
+  margin-right: 1vh;
+  background-color: greenyellow;
+  color: black;
+  border: none;
+  margin: 1vh;
+  padding: 12px 28px;
+  border-radius: 12px;
+  text-transform: uppercase;
+}
 .buscador {
   display: flex;
   justify-content: center;

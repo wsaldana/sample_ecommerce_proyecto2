@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom';
 import { SidebarData } from '../Usuarios/sidebar';
 import './navbar.css';
 import { IconContext } from 'react-icons';
+import { auth } from "../../config/firebase.config"
+import { loginAdmin } from './someFunctions';
 
-function Navbar() {
+function Navbar(props) {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
@@ -26,15 +28,37 @@ function Navbar() {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
+            <li>
+              <div id="userDisplayName">
+                <h4 id="displayname">
+                  <strong>
+                    <FaIcons.FaUserCircle />
+                    ‎‎‎‏‏‎ ‎‏‏‎ ‎‏‏‎{auth.currentUser.displayName ? auth.currentUser.displayName : auth.currentUser.email}
+                  </strong>
+                </h4>
+              </div>
+            </li>
             {SidebarData.map((item, index) => {
-              return (
-                <li key={index} className={item.cName}>
-                  <Link to={item.path}>
-                    {item.icon}
-                    <span>{item.title}</span>
-                  </Link>
-                </li>
-              );
+              if(item.onclickF){
+                return (
+                  // eslint-disable-next-line no-unused-expressions
+                  <li key={index} className={item.cName} onClick={item.onclickF}>
+                    <Link to={item.path}>
+                      {item.icon}
+                      <span>{item.title}</span>
+                    </Link>
+                  </li>
+                );
+              }else{
+                return (
+                  <li key={index} className={item.cName}>
+                    <Link to={item.path}>
+                      {item.icon}
+                      <span>{item.title}</span>
+                    </Link>
+                  </li>
+                );
+              }
             })}
           </ul>
         </nav>

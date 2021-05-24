@@ -9,7 +9,7 @@ import { render } from "@testing-library/react";
 
 function Panel() {
     const [searchTerm, setSearchTerm] = useState("");
-
+    const [show, setShow] = useState(false);
     const [users, setUser] = useState([]);
     function getUser() {
         db.collection('chats').onSnapshot((querySnapshot) => {
@@ -17,6 +17,7 @@ function Panel() {
             querySnapshot.forEach((doc) => {
                 const Data = doc.data();
                 Data.id = doc.id
+                Data.Show = false
                 items.push(Data)
             })
             setUser(items)
@@ -42,11 +43,10 @@ function Panel() {
         db.collection('panelchat').doc('esp19258@uvg.edu.gt').update({ fail: increment });
 
     }
-/*
-    setInterval(() => {
-        db.collection('chat').doc('3U1KybtBjT3DSRcx6xjl').update({ stats: 'fail' });
-      }, 10 * 1000);
-*/
+    function renderC() {
+        const variable = !show
+        setShow(variable)
+    }
     return (
         <div>
 
@@ -80,16 +80,17 @@ function Panel() {
                                             <button className="btnIniciar" >
                                                 {data.status}
                                             </button>
-                                            <button className="btnHistory" onClick={()=>{
+                                            <button className="btnHistory" onClick={() => {
                                                 render(
-                                                    <Chat chatId={data.id}/>
+                                                    <Chat chatId={data.id} />
                                                 )
-                                                
+
                                             }}>
                                                 START
                                             </button>
                                         </Col>
                                     </Row>
+
                                 </Container>
                             )
                         } if (data.status === "fail") {
@@ -104,11 +105,11 @@ function Panel() {
                                             <button className="btnFail">
                                                 {data.status}
                                             </button>
-                                            <button className="btnHistory" onClick={()=>{
+                                            <button className="btnHistory" onClick={() => {
                                                 render(
-                                                    <Chat chatId={data.id}/>
+                                                    <Chat chatId={data.id} />
                                                 )
-                                                
+
                                             }}>
                                                 HISTORY
                                             </button>
@@ -128,11 +129,35 @@ function Panel() {
                                             <button onClick={failChat} className="btnCompleted">
                                                 {data.status}
                                             </button>
-                                            <button className="btnHistory" onClick={()=>{
+                                            <button className="btnHistory" onClick={() => {
                                                 render(
-                                                    <Chat chatId={data.id}/>
+                                                    <Chat chatId={data.id} />
                                                 )
-                                                
+
+                                            }}>
+                                                HISTORY
+                                            </button>
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            )
+                        } if (data.status === "Finished") {
+
+                            return (
+                                <Container fluid className="grid">
+                                    <Row justify="between">
+                                        <Col className="Usuarios">
+                                            <h1>{data.clientEmail}</h1>
+                                        </Col>
+                                        <Col className="botones">
+                                            <button onClick={failChat} className="btnFinished">
+                                                {data.status}
+                                            </button>
+                                            <button className="btnHistory" onClick={() => {
+                                                render(
+                                                    <Chat chatId={data.id} />
+                                                )
+
                                             }}>
                                                 HISTORY
                                             </button>
@@ -143,7 +168,7 @@ function Panel() {
                         }
                     })
             }
-           
+
         </div >
     )
 }
