@@ -26,6 +26,8 @@ export default function ChatHeader(props) {
         {props.title}
         <span className={`badge rounded-pill ms-3 ${badgeType}`}>{badgeText}</span>
       </h1>
+      { (props.isChatFinished && props.isAdmin)? <button type="button" onClick={props.completeChat} className="btn btn-secondary">Finalizar</button>: null }
+      { (!props.isAdmin && !(props.isChatCompleted || props.isChatFinished))? <button type="button" onClick={props.abandonChat} className="btn btn-secondary">YEET</button>: null }
     </div>
   )
 }
