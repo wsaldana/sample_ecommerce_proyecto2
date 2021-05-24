@@ -32,7 +32,7 @@ const Chat = (props) => {
         const { status, clientEmail, adminEmail } = snapshot.data();
         setChatState(status);
 
-        if (adminEmail !== auth.currentUser.email) {
+        if (adminEmail === auth.currentUser.email) {
           
           setChatName(clientEmail.split('@')[0]);
         } else {
