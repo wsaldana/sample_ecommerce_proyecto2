@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, withRouter, useHistory, useLocation } from 'react-router-dom';
 import { SidebarData } from './sidebarUser';
 import './navbarUser.css';
 import { IconContext } from 'react-icons';
+import { auth, firebase } from "../../config/firebase.config";
+import IdleTimer from 'react-idle-timer';
 
-function Navbar() {
+function Navbar(props) {
   const [sidebar, setSidebar] = useState(false);
+  const idleTimerRef = useRef(null)
 
   const showSidebar = () => setSidebar(!sidebar);
 
@@ -25,8 +28,28 @@ function Navbar() {
     }
   }
 
+  const logout = () => {
+    auth.signOut().then(()=>{
+      props.history.push("/");
+      console.log("IDLE orale");
+      window.location.reload();
+    })
+  }
+
+  const [name, setName] = useState("User");
+  auth.onAuthStateChanged((user)=>{
+    if(user){
+      setName(auth.currentUser.displayName.split(" ")[0])
+    }
+  })
+
   return (
     <>
+      <IdleTimer
+        ref = {idleTimerRef}
+        timeout = {5 * 60 * 1000}
+        onIdle = {()=>logout()}
+      />
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className='navbar'>
           <Link to='#' className='menu-bars'>
@@ -43,6 +66,16 @@ function Navbar() {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
+            <li>
+              <div id="userDisplayName">
+                <h4 id="displayname">
+                  <strong>
+                    <FaIcons.FaUserCircle /> 
+                    ‎‎‎‏‏‎ ‎‏‏‎ ‎‏‏‎{name}
+                  </strong>
+                </h4>
+              </div>
+            </li>
             {SidebarData.map((item, index) => {
               return (
                 <li key={index} className={item.cName}>
@@ -53,6 +86,19 @@ function Navbar() {
                 </li>
               );
             })}
+                <li className='nav-text'>
+                  <button onClick = {() => {
+                      auth.signOut().then(()=>{
+                        console.log("logout usuario");
+                        console.log(auth.currentUser);
+                        props.history.push("/");
+                        window.location.reload();
+                      });
+                  }}>
+                    <AiIcons.AiOutlineUserDelete />
+                    <span>Logout</span>
+                  </button>
+                </li>
           </ul>
         </nav>
       </IconContext.Provider>
@@ -60,4 +106,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default withRouter(Navbar);
