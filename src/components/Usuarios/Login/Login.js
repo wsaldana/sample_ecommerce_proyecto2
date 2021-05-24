@@ -28,6 +28,7 @@ class Login extends React.Component {
           console.log("simon 2")
           this.props.history.push("/user/shop")
         }).catch((error) => {
+          console.log("Ha sucedido un error con la conexión")
           // Handle Errors here.
           var errorCode = error.code;
           var errorMessage = error.message;
