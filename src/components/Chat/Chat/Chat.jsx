@@ -33,7 +33,7 @@ const Chat = (props) => {
         setChatState(status);
 
         if (adminEmail === auth.currentUser.email) {
-          
+
           setChatName(clientEmail.split('@')[0]);
         } else {
           setChatName(adminEmail.split('@')[0]);
@@ -49,7 +49,7 @@ const Chat = (props) => {
       .collection('mensajes').orderBy('time')
       .onSnapshot((snapshot) => {
         const mensajes = []
-        
+
         snapshot.forEach(document => {
           const documentData = document.data();
           documentData.id = document.id;
@@ -60,12 +60,12 @@ const Chat = (props) => {
       }, (error) => {
         console.log(error)
         alert("Ha habido un error con la conexión")
-        
+
       });
   }
 
   const sendMessages = async (text) => {
-   
+
     await db.collection('chats').doc(props.chatId)
       .collection('mensajes').doc().set({
         content: text,
@@ -120,33 +120,36 @@ const Chat = (props) => {
   })};
 
 
-
-
   useEffect(() => {
     getMessages();
     getChatInfo();
     setTimerr();
     //setInputState(chatState === "Finished");
-    
+
 
   }, []);
 
 
-
   useEffect(() => {
-    
     setInputState((chatState === "Finished")||(chatState === "completed")||(chatState === "fail"));
     terminado = ((chatState === "Finished")||(chatState === "completed")||(chatState === "fail"));
     setIsChatFinished(chatState === "Finished");
     setIsChatCompleted(chatState === "completed");
-    
-    
+
   }, [chatState]);
 
 
   return (
     <div className="chat-message-container">
-      <ChatHeader title={chatName} chatState={chatState} />
+      <ChatHeader
+        title={chatName}
+        chatState={chatState}
+        isAdmin={isAdmin}
+        isChatCompleted={isChatCompleted}
+        isChatFinished={isChatFinished}
+        completeChat={() => completeChat()}
+        abandonChat={() => abandonChat()}
+      />
       <div className="chat-message-container">
         {
           mensajes.map((mensaje) => {
@@ -159,8 +162,6 @@ const Chat = (props) => {
         }
       </div>
       <ChatInput send={sendMessages} estado={inputState}/>
-      { (isChatFinished && isAdmin)? <button type="button" onClick={completeChat} >Finaliza el chat</button>: null }
-      { (!isAdmin && !(isChatCompleted || isChatFinished))? <button type="button" onClick={abandonChat}>Abandonar el chat</button>: null }
     </div>
   );
 }
