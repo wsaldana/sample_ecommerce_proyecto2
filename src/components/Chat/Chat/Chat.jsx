@@ -149,6 +149,7 @@ const Chat = (props) => {
         isChatFinished={isChatFinished}
         completeChat={() => completeChat()}
         abandonChat={() => abandonChat()}
+        time = {mensajes.length > 0 ? mensajes[0].time.toDate().toLocaleTimeString('en-US'): 'No hay mensajes'}
       />
       <div className="chat-message-container">
         {
@@ -157,6 +158,7 @@ const Chat = (props) => {
               key={mensaje.id}
               isSender={mensaje.sender === auth.currentUser.uid}
               content={mensaje.content}
+              
             />
           })
         }
