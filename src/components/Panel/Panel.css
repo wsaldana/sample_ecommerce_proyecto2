@@ -101,3 +101,11 @@
   padding-left: 10px;
   margin-left: 2vh;
 }
+.RowHomePanel{
+  display: flex;
+  
+}
+.ColHomePanel{
+  flex: 50%;
+  padding: 10px;
+}

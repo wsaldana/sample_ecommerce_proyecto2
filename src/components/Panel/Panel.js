@@ -7,10 +7,12 @@ import './Panel.css';
 import Chat from '../Chat/Chat/Chat';
 import { render } from "@testing-library/react";
 
-function Panel() {
+function Panel({home}) {
     const [searchTerm, setSearchTerm] = useState("");
     const [show, setShow] = useState(false);
     const [users, setUser] = useState([]);
+
+    
     function getUser() {
         db.collection('chats').onSnapshot((querySnapshot) => {
             const items = []
@@ -30,7 +32,7 @@ function Panel() {
     function countChat() {
         console.log("Entra correctamente")
         const db = firebase.firestore();
-        console.log(auth.currentUser.displayName)
+        
         const increment = firebase.firestore.FieldValue.increment(1);
         db.collection('panelchat').doc('esp19258@uvg.edu.gt').update({ closed: increment });
 
@@ -80,11 +82,8 @@ function Panel() {
                                             <button className="btnIniciar" >
                                                 {data.status}
                                             </button>
-                                            <button className="btnHistory" onClick={() => {
-                                                render(
-                                                    <Chat chatId={data.id} />
-                                                )
-
+                                            <button className="btnHistory" onClick={()=>{
+                                                home(data.id)
                                             }}>
                                                 START
                                             </button>
@@ -105,11 +104,8 @@ function Panel() {
                                             <button className="btnFail">
                                                 {data.status}
                                             </button>
-                                            <button className="btnHistory" onClick={() => {
-                                                render(
-                                                    <Chat chatId={data.id} />
-                                                )
-
+                                            <button className="btnHistory" onClick={()=>{
+                                                home(data.id)
                                             }}>
                                                 HISTORY
                                             </button>
@@ -129,11 +125,8 @@ function Panel() {
                                             <button onClick={failChat} className="btnCompleted">
                                                 {data.status}
                                             </button>
-                                            <button className="btnHistory" onClick={() => {
-                                                render(
-                                                    <Chat chatId={data.id} />
-                                                )
-
+                                            <button className="btnHistory"  onClick={()=>{
+                                                home(data.id)
                                             }}>
                                                 HISTORY
                                             </button>
@@ -153,11 +146,8 @@ function Panel() {
                                             <button onClick={failChat} className="btnFinished">
                                                 {data.status}
                                             </button>
-                                            <button className="btnHistory" onClick={() => {
-                                                render(
-                                                    <Chat chatId={data.id} />
-                                                )
-
+                                            <button className="btnHistory" onClick={()=>{
+                                                home(data.id)
                                             }}>
                                                 HISTORY
                                             </button>
