@@ -1,29 +1,94 @@
+.margin-zero{
+    margin: 0%;
+}
+
+.padding-zero{
+    padding: 0%;
+}
+
 .cartContainer{
-    width: calc(100vw);
-    height: calc(100vh);
     display: flex;
     margin-left: auto;
     margin-right: auto;
-    overflow-y: auto;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+.prodInfo{
+    text-align: center;
+}
+
+.prodQtyCart{
+    font-size: 1.3em;
+}
+
+.prodTitleCart{
+    font: 1.3em;
+}
+
+.prodPriceCart{
+    font-size: 1.3em;
+}
+
+.mainCart{
+    width: calc(70vw);
+    overflow-y: hidden;
     overflow-x: hidden;
 }
 
-.cartProducts{
-    width: calc(70vw);
-    height: calc(100vh);
+.Header{
+    width: calc(60vw);
+    height: calc(10vh);
+    margin-top: calc(3vh);
+    display: block;
 }
 
-.Header{
-    width: 80%;
-    height: calc(10vh);
-    margin-left: 10%;
-    margin-top: calc(3vh);
+.Header h2{
+    font-size: 20px;
+    position: relative;
+    left: 10%;
+    display: inline;
 }
 
 .Header h3{
     font-size: 20px;
     position: relative;
-    left: 70%;
+    left: 60%;
+    display: inline;
+}
+
+.tableHeader{
+    margin: 1%;
+    text-align: center;
+}
+
+.itemH{
+    display: inherit;
+    
+}
+
+.qtH{
+    display: inherit;
+    margin-left: 18%;
+}
+
+.totalH{
+    display: inherit;
+    margin-left: 25%;
+}
+
+.separatorOne{
+    margin-left: 10%;
+    width: 80%;
+    height: 1px;
+    background-color: rgb(184, 184, 184);
+}
+
+.separatorTwo{
+    margin-left: 10%;
+    margin-top: 4vh;
+    width: 80%;
+    height: 1px;
+    background-color: rgb(184, 184, 184);
 }
 
 .separator{
@@ -33,14 +98,67 @@
 }
 
 .cartList{
-    width: fit-content;
+    width: 80%;
     height: fit-content;
+    margin-left: 10%;
+}
+
+.cartProdTitle{
+    font-size: 2em;
+}
+
+.cartProduct{
+    margin-top: 4vh;
+    margin-bottom: 2vh;
+    margin-right: 2vh;
+    margin-left: 2vh;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px 3px #545454;
+    
+}
+
+.cartImg{
+    height: 20vh;
+    width: 145px;
+    z-index: -1;
+}
+
+.cartDelete{
+    height: 50px;
+    width: 100%;
+    background: #f0f0f0;
+    background: linear-gradient(to left, #f0f0f0 50%, rgb(255, 80, 80) 50%) right;
+    background-size: 200%;
+    transition: 500ms ease-out;
+    border-radius: 5px;
+    border: white;
+    text-justify: center;
+    font-size: 1.3em;
+}
+
+.cartDelete:hover{
+    background-position: left;
+}
+
+.cartCantidad{
+    text-align: center;
+    font-size: 20px;
+}
+
+.cartTotal{
+    text-align: right;
+    font-size: 20px;
+}
+
+.checkoutButton{
+    margin-top: 3vh;
+    margin-left: 10vw;
 }
 
 .orderSummary{
     width: calc(30vw);
-    height: calc(100vh);
     background-color: rgb(233, 233, 233);
+    border-radius: 5px;
 }
 
 .summary h3{
