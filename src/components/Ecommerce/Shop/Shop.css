@@ -12,37 +12,83 @@
     margin-right: auto;
     overflow-y: hidden;
     overflow-x: hidden;
+    height: 100%;
 }
 
 .eShopHeader{
-    display: flex;
+    z-index: 1;
+    width: calc(100vw);
+    top: 0px;
     background-color: #404041;
     height: 65px;
     padding-bottom: 10px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.priceLimits{
+    margin-top: 2vh;
+    color: white;
+    background-color: #404041;
+    height: 3vh;
+    width: 4vw;
+    padding: 0;
+}
+
+#minAmmount{
+    margin-left: 5vw;
+}
+
+.searchBarShop{
+    width: 5vw;
+    height: 4vh;
+    display: inline;
+}
+
+.lupaSearch{
+    margin-top: 2vh;
+    font-size: 2em;
+    color: white;
+    padding: 0;
+    width: auto;
+}
+
+.searchInput{
+    margin-top: 1vh;
+    color: white;
+    background-color: #404041;
+    height: 4.5vh;
+    width: 20vw;
 }
 
 .eShopTitle{
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    align-self: center;
     color: white;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    text-align: end;
+    margin-right: 15vw;
 }
 
 .eProductCard{
-    display: flex;
     align-self: center;
-    margin-top: 30px;
+    margin-left: 4vw;
+    margin-right: 2vw;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
     border-radius: 5px;
-    height: 575px;
-    width: 350px;
+    height: max-content;
     box-shadow: 3px 3px 3px 3px #545454;
-    transition: all 300ms ease;
+    transition: all 1s ease;
 }
 
 .eProductCard:hover{
     transform: translateY(-10px);
-    opacity: 80%;
+}
+
+.productName{
+    width: 100%;
+    text-align: center;
+    font-size: 3vw;
 }
 
 .disabled{
@@ -53,25 +99,44 @@
     overflow-y: hidden;
     overflow-x: hidden;
     text-align: center;
+    width: 10vw;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .productImage{
-    height: 30%;
-    width: 100%;
-    padding: 0%;
+    height: 20vh;
+    width: 20vh;
+    padding: 20px;
     margin-left: 0%;
 }
 
 .addBtn{
-    margin: 0px;
     background: #f0f0f0;
     background: linear-gradient(to left, #f0f0f0 50%, rgb(58, 104, 255) 50%) right;
     background-size: 200%;
-    transition: 200ms ease-out;
+    transition: 500ms ease-out;
+    height: 50px;
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 1vh;
+}
+
+.prodDescription{
+    font-size: 1.2vw;
+
+}
+
+.productPrice{
+    font-size: 1.5vw;
 }
 
 .addBtn:hover{
     background-position: left;
+}
+
+.addBtn:active{
+    background: rgb(52, 207, 46);
 }
 
 .eCart{
