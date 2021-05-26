@@ -21,9 +21,9 @@ function App() {
           <Route exact path='/' component={Login} />
           <div>
             <Navbar />
-            <Route path='/admin' exact component={Home} /> 
-            <Route path='/reports' component={Reports} />
-            <Route path='/settings' component={Settings} />
+            <Route path='/admin/home' component={Home} /> 
+            <Route path='/admin/reports' component={Reports} />
+            <Route path='/admin/settings' component={Settings} />
             <Route path='/logout' component={Logout} />
             <Route path='/admin/addProduct' component={AddForm} />
             <Route path='/admin/shop' component={EcommerceAdmin}/>
