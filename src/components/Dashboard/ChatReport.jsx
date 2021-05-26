@@ -1,16 +1,53 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import './chatRep.scss'
+import React, { useState } from 'react'
+import './chatRep.css'
 import img from './failedColor.png'
 import img2 from './completedColor.png'
 import img3 from './inProgresColor.png'
+import {db} from './config/firebase.config';
 
-function ChatReport({data, failed, inProgres, completed}) {
-    let max = -1
+
+
+
+
+function ChatReport() {
+
+const [chats, setChats] = useState([])
+
+let failed = 0
+let inProgres = 0
+let completed = 0
+let data = false;
+
+db.collection('chats').get()
+  .then(snapshot => {     
+      let dat = []
+      snapshot.forEach(doc => {
+          data = doc.data()
+          dat.push(data.status)
+         
+      })  
+      
+     if (dat.length > chats.length)
+     {
+       setChats(dat)
+     }
+  })
+
+
+chats.forEach(l => 
+  {
+    console.log(l)
+    if (l === 'fail') failed += 1
+    if (l === 'Finished') completed += 1
+    if (l === 'completed') inProgres += 1
+  })
+
+
+    let max = 0
     if (failed > max) max = failed
     if (inProgres > max) max = inProgres
     if (completed > max) max = completed
-    const graphSpace = 100
+    const graphSpace = max > 0 ? 100 : 0
     const fdisplay = (failed/max*graphSpace).toString().concat('%')
     const pdisplay = (inProgres/max*graphSpace).toString().concat('%')
     const cdisplay = (completed/max*graphSpace).toString().concat('%')
@@ -25,8 +62,6 @@ function ChatReport({data, failed, inProgres, completed}) {
       const inProgrestyle = {
         backgroundColor: "#8675ff",
         height: pdisplay,
-        flexGrow: 10,
-        order: 4,
         borderRadius: '5%'
       }
 
@@ -34,13 +69,11 @@ function ChatReport({data, failed, inProgres, completed}) {
       const completedStyle = {
         backgroundColor: "#19ffd6",
         height: cdisplay,
-        flexGrow: 10,
-        order: 6,
         borderRadius: '5%'
       }
       
     return (
-        data ? <div className = 'chatRep'>
+        data !== [] ? <div className = 'chatRep'>
             <div className = 'chartHeader'>
         
 
@@ -110,14 +143,6 @@ function ChatReport({data, failed, inProgres, completed}) {
             </div>
             </div> : <div className = 'chatRep'>No se encontraron datos sobre chats</div>
     )
-}
-
-ChatReport.propTypes =  
-{
-    data: PropTypes.bool.isRequired,
-    failed: PropTypes.number.isRequired,
-    inProgres: PropTypes.number.isRequired,
-    completed: PropTypes.number.isRequired
 }
 
 
