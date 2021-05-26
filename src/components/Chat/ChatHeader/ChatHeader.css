@@ -1,9 +1,42 @@
 .chat-banner {
     flex: 0 1 auto;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    box-shadow: 0 0 10px #cecece;
-    padding: 15px;
+    position: relative;
+    padding: 10px;
+    background-color: #ffffff;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 28px;
+    font-size: 17px;
+    box-shadow:  0 8px 6px -6px #cecece;
+}
+
+.userIcon{
+    width: 50px;
+    height: 50px;
+    border-radius: 50% ;
+    background-color: #1C8EF9;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.state{
+    width: 12px;
+    height: 12px;
+    border-radius: 50% ;
+}
+
+.chat-btn{
+    position: absolute;
+    right: 0;
+    margin: 0 15px 5px 0;
+}
+
+.display-7{
+    font-size: calc(5px + 2vw);
+    font-weight: 600;
+    line-height: 1.2;
 }
 
