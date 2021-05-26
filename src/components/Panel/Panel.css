@@ -2,27 +2,42 @@
   margin-top: auto;
   background-color: rgb(255, 255, 255);
   margin-left: 2vh;
+  
 }
 .Usuarios {
   background-color: grey;
-  border-radius: 12px;
-  margin-top: 2vh;
+  border-radius: 5px;
+  margin-top: 2vh !important;
   outline: solid rgb(255, 255, 255) 1px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  
+}
+.Usuarios h1{
+  
+  font-size: 20px !important;
+  width:250px;
+  text-align: center;
 }
 .Usuarios img {
-  height: 20vh;
+  height: 5vh;
 }
 .botones {
   margin-top: 2vh;
   position: relative;
+  display: flex;
+  flex-direction: row;
 }
 .btnEstado {
-  margin-right: 1vh;
+  
   background-color: #4075c7;
   color: black;
   margin: 1vh;
-  padding: 12px 28px;
-  border-radius: 12px;
+  width: 12vw;
+  border-radius: 5px;
   border: none;
   text-transform: uppercase;
 }
@@ -34,33 +49,33 @@
   cursor: pointer;
 }
 .btnIniciar {
-  margin-right: 1vh;
+  
   background-color: #18cabb;
   color: black;
   margin: 1vh;
-  padding: 12px 28px;
-  border-radius: 12px;
+  width: 12vw;
+  border-radius: 5px;
   border: none;
   text-transform: uppercase;
 }
 .btnFail {
-  margin-right: 1vh;
+  
   background-color: #e7661b;
   color: black;
   border: none;
   margin: 1vh;
-  padding: 12px 28px;
-  border-radius: 12px;
+  width: 12vw;
+  border-radius: 5px;
   text-transform: uppercase;
 }
 .btnHistory {
-  margin-right: 1vh;
+  
   background-color: #7c7972;
   color: black;
   border: none;
   margin: 1vh;
-  padding: 12px 28px;
-  border-radius: 12px;
+  width: 12vw;
+  border-radius: 5px;
 }
 
 .btnHistory:hover {
@@ -70,23 +85,24 @@
 }
 
 .btnCompleted {
-  margin-right: 1vh;
+  
   background-color: #28c242;
   color: black;
   border: none;
   margin: 1vh;
-  padding: 12px 28px;
-  border-radius: 12px;
+  width: 12vw;
+  border-radius: 5px;
   text-transform: uppercase;
 }
 .btnFinished{
-  margin-right: 1vh;
+  
   background-color: greenyellow;
   color: black;
   border: none;
   margin: 1vh;
-  padding: 12px 28px;
-  border-radius: 12px;
+  
+  border-radius: 5px;
+  width: 12vw;
   text-transform: uppercase;
 }
 .buscador {
@@ -100,4 +116,17 @@
   font-size: 20px;
   padding-left: 10px;
   margin-left: 2vh;
+}
+.RowHomePanel{
+  display: flex;
+  
+}
+.ColHomePanel{
+  flex: 50%;
+  padding: 10px;
+}
+
+.grid{
+  display: flex;
+  grid-row: inherit;
 }
