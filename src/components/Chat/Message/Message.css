@@ -1,12 +1,15 @@
 .message-receiver, .message-sender {
-    padding: 10px;
+    padding: 9px 9px 4px 9px;
     margin-top: 3px;
+    background-color: #fff;
 }
 
 .message-receiver {
     align-self: flex-start;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+    background-color: #40454c;
+    color: #fff;
 }
 .message-receiver:first-child, :not(.message-receiver) + .message-receiver {
     border-top-left-radius: 20px;
@@ -20,4 +23,11 @@
 }
 .message-sender:first-child, :not(.message-sender) + .message-sender {
     border-top-right-radius: 20px;
+}
+
+.time{
+    font-size: 10px;
+    color: #7c7972;
+    margin: 0;
+    justify-self: end;
 }

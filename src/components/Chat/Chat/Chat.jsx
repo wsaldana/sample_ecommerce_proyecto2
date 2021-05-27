@@ -17,6 +17,13 @@ let counterTimer = 0;
 let terminado = false;
 const Chat = (props) => {
 
+  const month_name = [
+    "JAN", "FEB", "MAR",
+    "APR", "MAY", "JUN",
+    "JUL", "AUG", "SEP",
+    "OCT", "NOV", "DEC"
+  ];
+
   const [mensajes, setMensajes] = useState([]);
   const [inputState, setInputState] = useState(false);
   const [chatState, setChatState] = useState("in progress");
@@ -140,7 +147,7 @@ const Chat = (props) => {
 
 
   return (
-    <div className="chat-message-container">
+    <div className="chat-container">
       <ChatHeader
         title={chatName}
         chatState={chatState}
@@ -149,16 +156,18 @@ const Chat = (props) => {
         isChatFinished={isChatFinished}
         completeChat={() => completeChat()}
         abandonChat={() => abandonChat()}
-        time = {mensajes.length > 0 ? mensajes[0].time.toDate().toLocaleTimeString('en-US'): 'No hay mensajes'}
       />
       <div className="chat-message-container">
+        <p className="text-center"> {mensajes.length > 0 ?
+          month_name[mensajes[0].time.toDate().getMonth()] +' '+ mensajes[0].time.toDate().getDate() +', '+ mensajes[0].time.toDate().getFullYear() : 'No hay mensajes'}</p>
         {
           mensajes.map((mensaje) => {
             return <Message
               key={mensaje.id}
               isSender={mensaje.sender === auth.currentUser.uid}
               content={mensaje.content}
-              
+              time={mensaje.time !== null? mensaje.time.toDate().toLocaleTimeString(): ''}
+
             />
           })
         }
