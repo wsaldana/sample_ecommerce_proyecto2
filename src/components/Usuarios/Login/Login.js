@@ -12,31 +12,20 @@ class Login extends React.Component {
 
     logear = async() =>{
       var provider = new firebase.auth.GoogleAuthProvider();
-      auth.signInWithRedirect(provider);
-      auth
-        .getRedirectResult()
-        .then((result) => {
-          if (result.credential) {
-            /** @type {firebase.auth.OAuthCredential} */
-            var credential = result.credential;
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            var token = credential.accessToken;
-            console.log(result.operationType)
-          }
-          // The signed-in user info.
-          var user = result.user;
-          console.log("simon 2")
-          this.props.history.push("/user/shop")
-        }).catch((error) => {
-          console.log("Ha sucedido un error con la conexión")
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // The email of the user's account used.
-          var email = error.email;
-          // The firebase.auth.AuthCredential type that was used.
-          var credential = error.credential;
-        });
+
+      auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(async () => {
+        try {
+          const result = await auth.signInWithPopup(provider);
+          this.props.history.push("/user/shop");
+        } catch (error) {
+          alert("Ha sucedido un error con la conexión: " + error.message);
+        }
+      })
+      .catch((error) => {
+        alert("Ha sucedido un error con la conexión: "+error.message);
+      });
+    
     }
 
     /*async loginAdmin(username,password){
@@ -81,7 +70,7 @@ class Login extends React.Component {
                             if(user){
                               console.log("logeado");
                               //DIRIGIR A LA PAGINA DE USUARIOS
-                              this.props.history.push('/admin');
+                              this.props.history.push('/admin/home');
                             }else{
                               console.log("no esta logeado");
                             }
