@@ -6,13 +6,13 @@ import { logout } from './someFunctions'
 export const SidebarData = [
   {
     title: 'Home',
-    path: '/admin',
+    path: '/admin/home',
     icon: <AiIcons.AiFillHome />,
     cName: 'nav-text'
   },
   {
     title: 'Reports',
-    path: '/reports',
+    path: '/admin/reports',
     icon: <IoIcons.IoIosPaper />,
     cName: 'nav-text'
   },
@@ -24,7 +24,7 @@ export const SidebarData = [
   },
   {
     title: 'Settings',
-    path: '/settings',
+    path: '/admin/settings',
     icon: <AiIcons.AiTwotoneSetting />,
     cName: 'nav-text'
   },
