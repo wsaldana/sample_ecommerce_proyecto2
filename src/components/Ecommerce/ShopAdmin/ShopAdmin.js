@@ -105,7 +105,7 @@ const EcommerceAdmin = () => {
             <div className='row'>
                 {visibleProducts.map((datos, index) => {
                     return (
-                        <div key={`${datos.data().Title} + ${index}`} className={datos.data().Qty > 0 ? 'col-5 eProductCard' : 'col-5 eProductCard disabled'}>
+                        <div key={`${datos.data().Title} + ${index}`} className={datos.data().Qty > 0 ? 'col-3 eProductCard' : 'col-3 eProductCard disabled'}>
                             <h2 className='col align-middle productName '>{datos.data().Title}</h2>
                             <div className='row align-items-center'>
                                 <img src={datos.data().img} className='col-12 align-middle productImage margin-zero' alt='imagen'></img>

@@ -4,15 +4,11 @@
 }
 
  body{
-    background-color: #1C8EF9;
     min-height: 100vh;
     display: flex;
     font-weight: 400;
     font-family: 'Fira Sans', sans-serif;
-    
     overflow-y: hidden;
-    
-
 } 
 
 
