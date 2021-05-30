@@ -119,12 +119,11 @@ function Navbar(props) {
                 </li>
 
 
-                <div className="floating-button-chat" id="profileGroupBtns" role="group" >
+                <button className="floating-button-chat" >
                     <Link to='#' >
                         <AiIcons.AiOutlineSend size="50px" color="primary" style={{ color: 'white', height:'40px', width:'40px' }}/>
-                    </Link>
-                       
-                    </div>  
+                    </Link> 
+                </button>  
           </ul>
         </nav>
       </IconContext.Provider>
