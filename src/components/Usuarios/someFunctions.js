@@ -3,6 +3,7 @@ import { auth } from "../../config/firebase.config"
 const logout = () =>{
     auth.signOut().then(() => {
         console.log('sign out')
+        window.location.reload();
     })
 }
 
