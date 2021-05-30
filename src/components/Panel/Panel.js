@@ -51,114 +51,114 @@ function Panel({home}) {
     }
     return (
         <div>
+            <div className='Div_panel'>
+            <h2 className="TituloPanel"> Panel Chat</h2>
+            <input type="text" className="buscador" placeholder="Buscar por estado" color="white" onChange={event => { setSearchTerm(event.target.value) }} /> 
+                {
+                    users &&
+                    users
+                        .filter(data => {
+
+                            if (searchTerm == "") {
+
+                                return data
+                            } else if (data.status.toLowerCase().includes(searchTerm.toLowerCase())) {
+                                return data
+
+                            }
 
 
-            <input type="text" className="buscador" placeholder="Buscar por estado" onChange={event => { setSearchTerm(event.target.value) }} />
-            {
-                users &&
-                users
-                    .filter(data => {
+                        })
+                        .map(data => {
+                            if (data.status === "in progress") {
+                                return (
+                                    <Container fluid className="grid">
+                                        <Row justify="between">
+                                            <Col className="Usuarios">
 
-                        if (searchTerm == "") {
+                                                <h1>{data.clientEmail}</h1>
+                                            </Col>
+                                            <Col className="botones">
+                                                <button className="btnIniciar" >
+                                                    {data.status}
+                                                </button>
+                                                <button className="btnHistory" onClick={()=>{
+                                                    home(data.id)
+                                                }}>
+                                                     START
+                                                </button>
+                                            </Col>
+                                        </Row>
 
-                            return data
-                        } else if (data.status.toLowerCase().includes(searchTerm.toLowerCase())) {
-                            return data
+                                    </Container>
+                                )
+                            } if (data.status === "fail") {
 
-                        }
+                                return (
+                                    <Container fluid className="grid">
+                                        <Row justify="between">
+                                            <Col className="Usuarios">
+                                                <h1>{data.clientEmail}</h1>
+                                            </Col>
+                                            <Col className="botones">
+                                                <button className="btnFail">
+                                                    {data.status}
+                                                </button>
+                                                <button className="btnHistory" onClick={()=>{
+                                                    home(data.id)
+                                                }}>
+                                                    HISTORY
+                                                </button>
+                                            </Col>
+                                        </Row>
+                                    </Container>
+                                )
+                            } if (data.status === "completed") {
 
+                                return (
+                                    <Container fluid className="grid">
+                                        <Row justify="between">
+                                            <Col className="Usuarios">
+                                                <h1>{data.clientEmail}</h1>
+                                            </Col>
+                                            <Col className="botones">
+                                                <button onClick={failChat} className="btnCompleted">
+                                                    {data.status}
+                                                </button>
+                                                <button className="btnHistory"  onClick={()=>{
+                                                    home(data.id)
+                                                }}>
+                                                    HISTORY
+                                                </button>
+                                            </Col>
+                                        </Row>
+                                    </Container>
+                                )
+                            } if (data.status === "Finished") {
 
-                    })
-                    .map(data => {
-                        if (data.status === "in progress") {
-                            return (
-                                <Container fluid className="grid">
-                                    <Row justify="between">
-                                        <Col className="Usuarios">
-
-                                            <h1>{data.clientEmail}</h1>
-                                        </Col>
-                                        <Col className="botones">
-                                            <button className="btnIniciar" >
-                                                {data.status}
-                                            </button>
-                                            <button className="btnHistory" onClick={()=>{
-                                                home(data.id)
-                                            }}>
-                                                START
-                                            </button>
-                                        </Col>
-                                    </Row>
-
-                                </Container>
-                            )
-                        } if (data.status === "fail") {
-
-                            return (
-                                <Container fluid className="grid">
-                                    <Row justify="between">
-                                        <Col className="Usuarios">
-                                            <h1>{data.clientEmail}</h1>
-                                        </Col>
-                                        <Col className="botones">
-                                            <button className="btnFail">
-                                                {data.status}
-                                            </button>
-                                            <button className="btnHistory" onClick={()=>{
-                                                home(data.id)
-                                            }}>
-                                                HISTORY
-                                            </button>
-                                        </Col>
-                                    </Row>
-                                </Container>
-                            )
-                        } if (data.status === "completed") {
-
-                            return (
-                                <Container fluid className="grid">
-                                    <Row justify="between">
-                                        <Col className="Usuarios">
-                                            <h1>{data.clientEmail}</h1>
-                                        </Col>
-                                        <Col className="botones">
-                                            <button onClick={failChat} className="btnCompleted">
-                                                {data.status}
-                                            </button>
-                                            <button className="btnHistory"  onClick={()=>{
-                                                home(data.id)
-                                            }}>
-                                                HISTORY
-                                            </button>
-                                        </Col>
-                                    </Row>
-                                </Container>
-                            )
-                        } if (data.status === "Finished") {
-
-                            return (
-                                <Container fluid className="grid">
-                                    <Row justify="between">
-                                        <Col className="Usuarios">
-                                            <h1>{data.clientEmail}</h1>
-                                        </Col>
-                                        <Col className="botones">
-                                            <button onClick={failChat} className="btnFinished">
-                                                {data.status}
-                                            </button>
-                                            <button className="btnHistory" onClick={()=>{
-                                                home(data.id)
-                                            }}>
-                                                HISTORY
-                                            </button>
-                                        </Col>
-                                    </Row>
-                                </Container>
-                            )
-                        }
-                    })
-            }
-
+                                return (
+                                    <Container fluid className="grid">
+                                        <Row justify="between">
+                                            <Col className="Usuarios">
+                                                <h1>{data.clientEmail}</h1>
+                                            </Col>
+                                            <Col className="botones">
+                                                <button onClick={failChat} className="btnFinished">
+                                                    {data.status}
+                                                </button>
+                                                <button className="btnHistory" onClick={()=>{
+                                                    home(data.id)
+                                                }}>
+                                                    HISTORY
+                                                </button>
+                                            </Col>
+                                        </Row>
+                                    </Container>
+                                )
+                            }
+                        })
+                }
+            </div>
         </div >
     )
 }

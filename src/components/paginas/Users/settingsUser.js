@@ -1,8 +1,28 @@
 import React, { Component } from 'react';
 import { auth, firebase } from '../../../config/firebase.config';
 import "./settingsUser.css";
+import '../../Usuarios/button.css';
+import { Link, withRouter, useHistory, useLocation } from 'react-router-dom';
+import * as AiIcons from 'react-icons/ai';
+
+
+
+
+import { makeStyles } from '@material-ui/core/styles';
+
+
+const useStyles = makeStyles((theme) => ({
+    button: {
+      margin: theme.spacing(1),
+    },
+  }));
+  
+
 
 export default class settingsUser extends Component {
+
+    
+   
 
     constructor(props){
         super(props);
@@ -38,6 +58,7 @@ export default class settingsUser extends Component {
 
     render() {
         return (
+            <div className="app">
             <div className="form">
                 <div className ="auth-inner">
 
@@ -76,9 +97,34 @@ export default class settingsUser extends Component {
                             disabled={this.state.disable}
                         >Save</button>
                     </div>
+
+
+                   
+
+
+
+                    
+
+                   
+
+                   
+
+                   
+
+                   
+                    
+
+                   
                     <br/><br/><br/>
                 </div>
+
+                
+                
             </div>
+           
+
+            </div>
+            
         )
     }
 }

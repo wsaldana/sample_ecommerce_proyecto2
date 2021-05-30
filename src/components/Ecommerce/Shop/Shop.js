@@ -125,35 +125,37 @@ const Ecommerce = () => {
                     className="col-2 justify-content-end align-middle searchInput"
                 ></input>
             </header>
-            <div className="row">
+            <div className="row p-5 center-items">
                 {visibleProducts.map((datos, index) => {
                     return (
                         <div
                             key={`${datos.data().Title} + ${index}`}
                             className={
                                 datos.data().Qty > 0
-                                    ? "col-5 eProductCard"
-                                    : "col-5 eProductCard disabled"
+                                    ? "col-3 eProductCard"
+                                    : "col-3 eProductCard disabled"
                             }
                         >
-                            <h2 className="col align-middle productName ">
-                                {datos.data().Title}
-                            </h2>
-                            <div className="row align-items-center">
-                                <img
-                                    src={datos.data().img}
-                                    className="col-12 align-middle productImage margin-zero"
-                                    alt="imagen"
-                                ></img>
-                                <p className="col align-top prodDescription margin-zero">
-                                    {datos.data().descr}
-                                </p>
+                            <div className="row">
+                                <h2 className="col align-middle productName ">
+                                                                {datos.data().Title}
+                                                            </h2>
+                                <div className="align-items-center">
+                                    <img
+                                        src={datos.data().img}
+                                        className="align-middle productImage margin-zero"
+                                        alt="imagen"
+                                    ></img>
+                                    <p className="col align-top prodDescription margin-zero">
+                                        {datos.data().descr}
+                                    </p>
+                                </div>
                             </div>
-                            <div className="row align-items-center">
+                            <div className="row align-items-center pt-3">
                                 <p className="col margin-zero">{`${datos.data().Qty
                                     } in stock`}</p>
                             </div>
-                            <div className="row align-items-center margin-zero">
+                            <div className="row align-items-center margin-zero pt-3">
                                 <h2 className="col-6 align-middle productPrice margin-zero">{`$${datos.data().price
                                     }`}</h2>
                                 <div className="col-6 align-middle justify-content-center margin-zero">
@@ -195,7 +197,7 @@ const Ecommerce = () => {
                                     Add to Cart (1)
                                 </button>
                             ) : (
-                                <button type="button" disabled>
+                                <button type="button" className="soldOutBtn" disabled>
                                     Sold Out
                                 </button>
                             )}
