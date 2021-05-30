@@ -56,7 +56,7 @@ const Receipt = () =>{
         <div className='row justify-content-center receiptContainer'>
             {sales.map((item, index) =>{
                 return(
-                    <div key={`${index}+${item.id}`} className='col-5 justify-content-center receiptCont margin-zero' id={`#receipt-${item.id}`}>
+                    <div key={`${index}+${item.id}`} className='col-3 justify-content-center receiptCont margin-zero' id={`#receipt-${item.id}`}>
                         <h2 className='col-12'>{`Receipt #${item.id}`}</h2>
                         <button className='col-12 btn btn-primary' type='button' onClick={() => printReceipt(item)}>Download PDF</button>
                         <h2 className='col-12'>{`Buyer: ${item.data().client}`}</h2>

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import logo from './logo.svg';
-import './App.css';
+
+import './rankign.css';
 import {db, firebase, auth} from './config/firebase.config';
 import html2canvas from 'html2canvas';
 import { jsPDF } from "jspdf";
+//import {database} from 'firebase'
 import {
-  PieChart,
-  Pie,
+
   Tooltip,
   BarChart,
   XAxis,
@@ -17,9 +17,6 @@ import {
 } from "recharts";
 
 
-
-let usuarios = []
-let chats= []
 
 
 
@@ -38,56 +35,79 @@ function toPDF(){
 }
 
 
-function ranking() {
-
- 
-
   
- 
- const dd= []
-const [w, setw] = useState(0)
- db.collection('panelchat').get()
-            .then(snapshot => {
-                //console.log(snapshot)
-               
-                snapshot.forEach(doc => {
-                   const data = doc.data()
-                    data.id = doc.id
-                    usuarios.push(data.id)
-                    chats.push(data.closed)
-                    const k= JSON.stringify(doc.data())
-                    const q= JSON.parse(k)
-                   // console.log(q)
-                    setw(q["closed"])
-                    //console.log(w)
-                    dd.push(w)
-                    
-                })
-               // this.setState({ users: usuarios })
-                //console.log(usuarios[0])
-                
-            })
-//console.log(w)
 
-//console.log(dd)
-//console.log(chats[0]);
+function Ranking() {
 
-const datas = [
-  { name: usuarios[0], chats: chats[0] },
-  { name: usuarios[1], chats: chats[1] }
-];
+  const [users, setUser] = useState([]);
+  function getUser() {
+    db.collection('panelchat').onSnapshot((querySnapshot) => {
+        const items = []
+        querySnapshot.forEach((doc) => {
+            const Data = doc.data();
+            Data.id = doc.id
+            
+            items.push(Data)
+        })
+        setUser(items)
+    })
+  }
+  useEffect(() => {
+    getUser();
+  }, [])
+  const ddb= []
+  for(var i =0 ; i<users.length;i++)
+  {
+    const e= Object.entries(users[i])
+    ddb.push(e)
+  }
+  const inda=[]
+for(var j=0; j<ddb.length;j++)
+{
+  for(var i =0; i<ddb[j].length;i++){
+    if (ddb[j][i].indexOf("id")!=-1)
+     {
+       inda.push(ddb[j][i][1])
+     }   
+     
+  }
+}
+const indc=[]
+for(var j=0; j<ddb.length;j++)
+{
+  for(var i =0; i<ddb[j].length;i++){
+    if (ddb[j][i].indexOf("closed")!=-1)
+     {
+       indc.push(ddb[j][i][1])
+     }   
+     
+  }
+}
 
- 
+  console.log(ddb)
+  console.log(inda)
+  console.log(indc)
+
+  const datas=[]
+  for(var i=0; i <inda.length;i++)
+  {
+    datas.push({name:inda[i],chats:indc[i]})
+  }
+  console.log(datas)
+  let mensajes = []
+
+
+
  
  
  return (
    
     <div style={{ textAlign: "center" }} id="chartadminr">
-      <h1>ranking de mejores administradores</h1>
+      <h1></h1>
       <div className="App" id="chartrankning">
       {()=>toPDF()}
         <BarChart
-          width={500}
+          width={1200}
           height={300}
           data={datas}
           margin={{
@@ -110,9 +130,9 @@ const datas = [
           <Bar dataKey="chats" fill="#8884d8" background={{ fill: "#eee" }} />
         </BarChart>
       </div>
-      <button onClick= {toPDF}> Descarga pdf pdf</button>
+      <button class="btn btn-accept" onClick= {toPDF} > Descarga pdf</button>
     </div>
   );
 };
 
-export default ranking;
+export default Ranking;

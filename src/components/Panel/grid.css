@@ -1,17 +1,16 @@
 .grid {
   margin-top: auto;
   background-color: white;
+  position: relative;
 }
 .Usuarios {
   background-color: grey;
-  margin-top: 2vh;
+  margin-top: 1vh;
   outline: solid black 1px;
 }
-.Usuarios img {
-  height: 20vh;
-}
+
 .botones {
-  margin-top: 2vh;
+  margin-top: 1vh;
 }
 .btnEstado {
   margin-right: 1vh;
@@ -56,4 +55,32 @@
   margin: 1vh;
   padding: 12px 28px;
   border-radius: 12px;
+}
+.btnCompleted {
+  background-color: #28c242;
+  color: black;
+  border: none;
+  margin: 1vh;
+  padding: 12px 28px;
+  border-radius: 12px;
+  margin-right: 1vh;
+}
+.btnFinished{
+  background-color: greenyellow;
+  color: black;
+  border: none;
+  margin: 1vh;
+  padding: 12px 40px;
+  border-radius: 12px;
+  margin-right: 1vh;
+
+}
+.btnIniciar {
+  background-color: #18cabb;
+  color: black;
+  border: none;
+  margin: 1vh;
+  padding: 10px 28px;
+  border-radius: 12px;
+  margin-right: 1vh;
 }

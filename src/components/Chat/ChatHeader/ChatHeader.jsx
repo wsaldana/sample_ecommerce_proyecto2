@@ -15,21 +15,28 @@ export default function ChatHeader(props) {
       badgeText = "In Progress";
       break;
     default:
-      badgeType = "bg-info";
+      badgeType = "bg-danger";
       badgeText = props.chatState;
       break;
   }
 
   return (
     <div className="chat-banner">
-      <h1 className="display-4">
-        {props.title}
-        <span className={`badge rounded-pill ms-3 ${badgeType}`}>{badgeText}</span>
-        
-      </h1>
-      <span>Chat iniciado a las: &nbsp; {props.time}</span>
-      { (props.isChatFinished && props.isAdmin)? <button type="button" onClick={props.completeChat} className="btn btn-secondary">Finalizar</button>: null }
-      { (!props.isAdmin && !(props.isChatCompleted || props.isChatFinished))? <button type="button" onClick={props.abandonChat} className="btn btn-secondary">YEET</button>: null }
+      <div className="userIcon">
+        <h3 className="m-0">
+          {props.title.charAt(0).toUpperCase()}{props.title.charAt(1).toUpperCase()}
+        </h3>
+      </div>
+      <div className="ms-3 d-flex flex-column align-items-start">
+        <p className="mb-1 display-7">{props.title.toUpperCase()}</p>
+        <div className="d-flex align-items-center">
+          <div className={`state me-1 ${badgeType}`}/>
+          <p className="m-0">{badgeText.charAt(0).toUpperCase()}{badgeText.slice(1)}</p>
+        </div>
+      </div>
+      {/*<span>Chat iniciado a las: &nbsp; {props.time}</span>*/}
+      { (props.isChatFinished && props.isAdmin)? <button type="button" onClick={props.completeChat} className="btn btn-primary chat-btn">Completar</button>: null }
+      {  (!props.isAdmin && !(props.isChatCompleted || props.isChatFinished))?<button type="button" onClick={props.abandonChat} className="btn btn-primary chat-btn">Finalizar</button>: null}
     </div>
   )
 }
