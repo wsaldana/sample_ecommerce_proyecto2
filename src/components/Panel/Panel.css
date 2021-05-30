@@ -1,20 +1,24 @@
-.grid {
-  margin-top: auto;
-  background-color: rgb(255, 255, 255);
-  margin-left: 2vh;
-  
+.Div_panel {
+  background-color: white;
+  width: 700px;
+  min-height: 300px;
+  height: min-content;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 10px 10px 42px 0px rgba(0, 0, 0, 0.50);
+}
+.TituloPanel{
+  text-align: center;
 }
 .Usuarios {
   background-color: grey;
   border-radius: 5px;
-  margin-top: 2vh !important;
+  margin-top: 1vh !important;
   outline: solid rgb(255, 255, 255) 1px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-
-  
 }
 .Usuarios h1{
   
@@ -22,9 +26,7 @@
   width:250px;
   text-align: center;
 }
-.Usuarios img {
-  height: 5vh;
-}
+
 .botones {
   margin-top: 2vh;
   position: relative;
@@ -36,7 +38,6 @@
   background-color: #4075c7;
   color: black;
   margin: 1vh;
-  width: 12vw;
   border-radius: 5px;
   border: none;
   text-transform: uppercase;
@@ -53,10 +54,10 @@
   background-color: #18cabb;
   color: black;
   margin: 1vh;
-  width: 12vw;
   border-radius: 5px;
   border: none;
   text-transform: uppercase;
+  font-size: 15px;
 }
 .btnFail {
   
@@ -64,7 +65,6 @@
   color: black;
   border: none;
   margin: 1vh;
-  width: 12vw;
   border-radius: 5px;
   text-transform: uppercase;
 }
@@ -74,7 +74,6 @@
   color: black;
   border: none;
   margin: 1vh;
-  width: 12vw;
   border-radius: 5px;
 }
 
@@ -85,38 +84,40 @@
 }
 
 .btnCompleted {
-  
   background-color: #28c242;
   color: black;
   border: none;
   margin: 1vh;
-  width: 12vw;
   border-radius: 5px;
   text-transform: uppercase;
 }
 .btnFinished{
-  
   background-color: greenyellow;
   color: black;
   border: none;
   margin: 1vh;
-  
   border-radius: 5px;
-  width: 12vw;
   text-transform: uppercase;
 }
+
 .buscador {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 20px;
-  width: 300px;
-  height: 40px;
-  font-size: 20px;
-  padding-left: 10px;
-  margin-left: 2vh;
+  width: 590px;
+  height: 50px;
+  background: #444449;
+  border: none;
+  font-size: 15pt;
+  float: left;
+  color: white;
+  padding-left: 45px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
+.buscador::placeholder{
+  color: white;
+  font-weight: normal;
+}
+
 .RowHomePanel{
   display: flex;
   
