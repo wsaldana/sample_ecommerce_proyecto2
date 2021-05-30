@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap');
 .App {
+  position: relative;
   text-align: center;
   align-items: center;
   justify-content: center;
@@ -41,6 +43,8 @@
 
 
 .btn{
+  position: relative;
+  top: 90px;
   border: none;
   border-radius: 40px;
   color: #fff;
@@ -53,9 +57,18 @@
 }
 
 .btn-accept {
-  background-color: #3369ff;
+  background-color: #474747;
 }
 
 .btn-accept:hover {
-  background-color: #33AFFF;
+  background-color: #727272;
+}
+
+.tituloadmins
+{
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.rechart-wrapper
+{
+  position: relative;
 }
