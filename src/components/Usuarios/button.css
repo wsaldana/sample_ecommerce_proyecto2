@@ -1,0 +1,21 @@
+* {
+    margin : 0;
+    padding : 0;
+}
+
+.App{
+    position: fixed;
+    top : 590px;
+    left: 1290px;
+    cursor: pointer;
+    overscroll-behavior: contain;
+    overflow: hidden;
+}
+
+.fab-icon-holder{
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    background: red;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}

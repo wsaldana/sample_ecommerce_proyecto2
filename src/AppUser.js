@@ -9,16 +9,20 @@ import Shop from './components/Ecommerce/Shop/Shop';
 import Cart from './components/Ecommerce/Cart/Cart';
 import Receipt from './components/Ecommerce/Receipt/Receipt';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import Reports from './components/Usuarios/button';
 
 function App() {
 
   return (
     <>
+    
       <Router>
         <Switch>
           <Route exact path='/' component={Login} />
-          <div>
-            <Navbar />
+        
+          <div>     
+          <Navbar />
+            
             <Route path='/user/settings' component={Settings} />
             <Route path='/user/shop' component={Shop} />
             <Route path='/user/cart' component={Cart} />
@@ -27,6 +31,8 @@ function App() {
           </div>
         </Switch>
       </Router>
+
+      
     </>
   );
 }

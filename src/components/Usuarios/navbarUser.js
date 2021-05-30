@@ -7,8 +7,24 @@ import './navbarUser.css';
 import { IconContext } from 'react-icons';
 import { auth, firebase } from "../../config/firebase.config";
 import IdleTimer from 'react-idle-timer';
+import './button.css'
+import { makeStyles } from '@material-ui/core/styles';
+
+
 
 function Navbar(props) {
+
+  const useStyles = makeStyles((theme) => ({
+    margin: {
+      margin: theme.spacing(1),
+    },
+    extendedIcon: {
+      marginRight: theme.spacing(1),
+    },
+  }));
+
+
+
   const [sidebar, setSidebar] = useState(false);
   const idleTimerRef = useRef(null)
 
@@ -45,6 +61,7 @@ function Navbar(props) {
 
   return (
     <>
+    
       <IdleTimer
         ref = {idleTimerRef}
         timeout = {5 * 60 * 1000}
@@ -58,7 +75,23 @@ function Navbar(props) {
           <Link to='/user/cart' className='menu-cart'>
             <AiIcons.AiOutlineShoppingCart onClick={showCart} />
           </Link>
+         
+          
         </div>
+
+        
+
+        
+
+        
+
+        
+       
+
+
+
+        
+     
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
           <ul className='nav-menu-items' onClick={showSidebar}>
             <li className='navbar-toggle'>
@@ -99,9 +132,35 @@ function Navbar(props) {
                     <span>Logout</span>
                   </button>
                 </li>
+
+
+                <div className="App" id="profileGroupBtns" role="group" >
+                    <Link to='#' >
+                        <AiIcons.AiOutlineSend size="50px" color="blue"/>
+                    </Link>
+                       
+                    </div>
+
+                
+
+
+                
+
+               
+
+
+
+                
           </ul>
+          
+
         </nav>
+        
+
       </IconContext.Provider>
+      
+
+     
     </>
   );
 }
