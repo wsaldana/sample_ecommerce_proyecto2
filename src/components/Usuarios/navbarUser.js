@@ -76,22 +76,7 @@ function Navbar(props) {
             <AiIcons.AiOutlineShoppingCart onClick={showCart} />
           </Link>
          
-          
         </div>
-
-        
-
-        
-
-        
-
-        
-       
-
-
-
-        
-     
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
           <ul className='nav-menu-items' onClick={showSidebar}>
             <li className='navbar-toggle'>
@@ -134,33 +119,15 @@ function Navbar(props) {
                 </li>
 
 
-                <div className="App" id="profileGroupBtns" role="group" >
+                <div className="floating-button-chat" id="profileGroupBtns" role="group" >
                     <Link to='#' >
-                        <AiIcons.AiOutlineSend size="50px" color="blue"/>
+                        <AiIcons.AiOutlineSend size="50px" color="primary" style={{ color: 'white', height:'40px', width:'40px' }}/>
                     </Link>
                        
-                    </div>
-
-                
-
-
-                
-
-               
-
-
-
-                
+                    </div>  
           </ul>
-          
-
         </nav>
-        
-
       </IconContext.Provider>
-      
-
-     
     </>
   );
 }
