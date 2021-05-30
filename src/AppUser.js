@@ -11,7 +11,6 @@ import Receipt from './components/Ecommerce/Receipt/Receipt';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-
   return (
     <>
       <Router>
