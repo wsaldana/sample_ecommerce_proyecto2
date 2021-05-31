@@ -85,7 +85,7 @@ const Cart = () => {
             .doc(toDel.id)
             .delete()
             .then(() => {
-                window.location.reload();
+                setOrder(order.filter(element => (element.id !== toDel.id)));
                 alert("Order deleted successfully.");
             })
             .catch((error) => {
