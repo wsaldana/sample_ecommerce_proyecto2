@@ -31,8 +31,9 @@ const Chat = (props) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isChatFinished, setIsChatFinished] = useState(true);
   const [isChatCompleted, setIsChatCompleted] = useState(true);
-
-
+  const [chatId, setChatId] = useState(props.chatId); 
+  
+  
   const getChatInfo = async () => {
     db.collection('chats').doc(props.chatId)
       .onSnapshot((snapshot) => {
@@ -49,7 +50,6 @@ const Chat = (props) => {
         }
       });
   }
-
 
   const getMessages = async () => {
     db.collection('chats').doc(props.chatId)
@@ -132,7 +132,9 @@ const Chat = (props) => {
     getChatInfo();
     setTimerr();
     //setInputState(chatState === "Finished");
-
+    if(chatId===null||chatId.isUndefined()){
+      
+    }
 
   }, []);
 

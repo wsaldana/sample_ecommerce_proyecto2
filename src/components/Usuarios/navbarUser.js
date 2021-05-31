@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
+import { BsChatDots, BsFillChatDotsFill } from 'react-icons/bs';
 import { Link, withRouter, useHistory, useLocation } from 'react-router-dom';
 import { SidebarData } from './sidebarUser';
 import './navbarUser.css';
@@ -118,11 +119,10 @@ function Navbar(props) {
                   </button>
                 </li>
 
-
                 <button className="floating-button-chat" >
-                    <Link to='#' >
-                        <AiIcons.AiOutlineSend size="50px" color="primary" style={{ color: 'white', height:'40px', width:'40px' }}/>
-                    </Link> 
+                  <BsFillChatDotsFill
+                  size={"50px"}
+                  className={"m-0"}/>
                 </button>  
           </ul>
         </nav>
