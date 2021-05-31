@@ -36,7 +36,7 @@ export default function ChatHeader(props) {
       </div>
       {/*<span>Chat iniciado a las: &nbsp; {props.time}</span>*/}
       { (props.isChatFinished && props.isAdmin)? <button type="button" onClick={props.completeChat} className="btn btn-primary chat-btn">Completar</button>: null }
-      {  (!props.isAdmin && !(props.isChatCompleted || props.isChatFinished))?<button type="button" onClick={props.abandonChat} className="btn btn-primary chat-btn">Finalizar</button>: null}
+      {  (props.state ==='in progress' && !props.isAdmin)?<button type="button" onClick={props.abandonChat} className="btn btn-primary chat-btn">Finalizar</button>: null}
     </div>
   )
 }
