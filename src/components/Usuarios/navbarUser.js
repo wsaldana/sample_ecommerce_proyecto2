@@ -13,8 +13,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 
 
-function Navbar(props) {
 
+function Navbar(props) {
+  
   const useStyles = makeStyles((theme) => ({
     margin: {
       margin: theme.spacing(1),
@@ -59,6 +60,8 @@ function Navbar(props) {
       setName(auth.currentUser.displayName.split(" ")[0])
     }
   })
+
+ 
 
   return (
     <>
@@ -118,12 +121,6 @@ function Navbar(props) {
                     <span>Logout</span>
                   </button>
                 </li>
-
-                <button className="floating-button-chat" >
-                  <BsFillChatDotsFill
-                  size={"50px"}
-                  className={"m-0"}/>
-                </button>  
           </ul>
         </nav>
       </IconContext.Provider>

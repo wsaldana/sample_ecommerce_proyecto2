@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import './AppUser.css';
 import Navbar from './components/Usuarios/navbarUser';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -10,8 +10,16 @@ import Cart from './components/Ecommerce/Cart/Cart';
 import Receipt from './components/Ecommerce/Receipt/Receipt';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Reports from './components/Usuarios/button';
+import { BsFillChatDotsFill } from 'react-icons/bs';
+import Chat from '../src/components/Chat/Chat/Chat';
+
+
 
 function App() {
+  const [habilitarChat, setHabilitarChat] = useState(false);
+  const openChat = () =>{
+    setHabilitarChat(!habilitarChat)
+  }
   return (
     <>
     
@@ -30,7 +38,18 @@ function App() {
           </div>
         </Switch>
       </Router>
-
+      <button className="floating-button-chat" >
+                  <BsFillChatDotsFill
+                  size={"50px"}
+                  className={"m-0"}
+                  onClick={openChat}/>
+                </button>  
+                <div className = 'sticky-bottom-chat'>
+                {
+                habilitarChat? <Chat/>: null
+                }
+                </div>
+                
       
     </>
   );
