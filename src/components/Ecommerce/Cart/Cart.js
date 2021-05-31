@@ -8,7 +8,7 @@ const Cart = () => {
     const [order, setOrder] = useState([]);
     const [totalPrices, setTotalPrices] = useState([]);
     const history = useHistory();
-    
+
     const updateCart = async () => {
         const response = db.collection("order");
         const data = await response.get();
@@ -32,9 +32,9 @@ const Cart = () => {
         return result.toFixed(2);
     };
 
-    const getTotalItems = () =>{
+    const getTotalItems = () => {
         let result = 0;
-        order.forEach(elem =>{
+        order.forEach(elem => {
             result += elem.data().qty;
         })
         return result;
@@ -50,33 +50,38 @@ const Cart = () => {
         const data = await response.get();
         const responseprods = db.collection("products");
         const dataprods = await responseprods.get();
-        data.docs.forEach((doc) => {
-            if (doc.data().orderedBy === auth.currentUser.email) {
-                dataprods.docs.forEach((item) => {
-                    if (item.id === doc.data().prodId) {
-                        let initQuant = parseInt(item.data().Qty);
-                        let finalQuant = initQuant - doc.data().qty;
-                        let finalQuantI = parseInt(finalQuant);
-                        db.collection("products").doc(item.id).update({
-                            Qty: finalQuantI,
-                        });
-                    }
-                });
-                response.doc(doc.id).delete();
-            }
-        })
+        if (order.length === 0) {
+            alert("Your Cart is Empty ")
+        }
+        else {
+            data.docs.forEach((doc) => {
+                if (doc.data().orderedBy === auth.currentUser.email) {
+                    dataprods.docs.forEach((item) => {
+                        if (item.id === doc.data().prodId) {
+                            let initQuant = parseInt(item.data().Qty);
+                            let finalQuant = initQuant - doc.data().qty;
+                            let finalQuantI = parseInt(finalQuant);
+                            db.collection("products").doc(item.id).update({
+                                Qty: finalQuantI,
+                            });
+                        }
+                    });
+                    response.doc(doc.id).delete();
+                }
+            })
 
-        db.collection('sales').doc().set({
-            client: auth.currentUser.email,
-            itemsPurchased: getTotalItems(),
-            total: totalMoney,
-            date: now.toLocaleDateString(),
-            time: nowtime
-        });
+            db.collection('sales').doc().set({
+                client: auth.currentUser.email,
+                itemsPurchased: getTotalItems(),
+                total: totalMoney,
+                date: now.toLocaleDateString(),
+                time: nowtime
+            });
 
-        alert("Thanks for your purchase. :)");
+            alert("Thanks for your purchase. :)");
 
-        history.push('/user/receipt');
+            history.push('/user/receipt');
+        }
     };
 
     const cancelOrder = (toDel) => {
