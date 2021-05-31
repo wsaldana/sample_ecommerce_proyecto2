@@ -1,0 +1,14 @@
+.c1{
+    border-color: black;
+    border-style: solid;
+    border-radius: 25px;
+    margin:30px;
+    padding: 30px;
+}
+.c2{
+    border-color: black;
+    border-style: solid;
+    border-radius: 25px;
+    margin:30px;
+    height: 650px;
+}

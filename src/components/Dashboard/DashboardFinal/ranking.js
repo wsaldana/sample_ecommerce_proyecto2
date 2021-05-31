@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import domtoimage from 'dom-to-image';
 import './rankign.css';
 import {db, firebase, auth} from './config/firebase.config';
-import html2canvas from 'html2canvas';
+
 import { jsPDF } from "jspdf";
-//import {database} from 'firebase'
+
 import {
 
   Tooltip,
