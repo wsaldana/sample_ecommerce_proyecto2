@@ -44,15 +44,13 @@ const Chat = (props) => {
       .doc(chatId)
       .onSnapshot((snapshot) => {
         const { status, clientEmail, adminEmail } = snapshot.data();
-        console.log("Cambio de la información del header")
-        console.log(status)
-        console.log(clientEmail)
-        console.log(adminEmail)
+        setChatState(status);
 
-        if (adminEmail === auth.currentUser.email) {
-          setChatName(clientEmail.split("@")[0]);
-        } else {
+        if (adminEmail !== auth.currentUser.email) {
           setChatName(adminEmail.split("@")[0]);
+          setIsAdmin(false);
+        } else {
+          setChatName(clientEmail.split("@")[0]);
           setIsAdmin(true);
           //aquí trigger si es admin
         }
@@ -84,6 +82,11 @@ const Chat = (props) => {
   };
 
   const sendMessages = async (text) => {
+    console.log(chatState);
+    console.log(isChatFinished);
+    console.log(isChatCompleted);
+    console.log(isAdmin);
+    
     await db
       .collection("chats")
       .doc(chatId)
@@ -108,7 +111,7 @@ const Chat = (props) => {
       setChatState("Finished");
       await db
         .collection("chats")
-        .doc(props.chatId)
+        .doc(chatId)
         .update({
           status: "Finished",
         })
@@ -128,7 +131,7 @@ const Chat = (props) => {
   const completeChat = async () => {
     await db
       .collection("chats")
-      .doc(props.chatId)
+      .doc(chatId)
       .update({
         status: "completed",
       })
@@ -139,9 +142,10 @@ const Chat = (props) => {
   };
 
   const abandonChat = async () => {
+    console.log(isAdmin)
     await db
       .collection("chats")
-      .doc(props.chatId)
+      .doc(chatId)
       .update({
         status: "Finished",
       })
@@ -163,7 +167,6 @@ const Chat = (props) => {
         //docRef.collection("mensajes").doc()
           //.set({ content: "Welcome!", time: firebase.firestore.FieldValue.serverTimestamp() })
         setChatId(docRef.id);
-        console.log(docRef.id);
       })
   };
 
@@ -202,6 +205,7 @@ const Chat = (props) => {
         isChatCompleted={isChatCompleted}
         isChatFinished={isChatFinished}
         completeChat={() => completeChat()}
+        state={chatState}
         abandonChat={() => abandonChat()}
       />
       <div className="chat-message-container">
